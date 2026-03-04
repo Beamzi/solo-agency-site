@@ -1,8 +1,10 @@
 export const homeContent = {
   hero: {
-    eyebrow: "New Website",
-    title: "Sass Design Agency",
+    title: "Custom Websites and Fullstack Integrations.",
     description:
-      "A conversion-focused visual direction for your next launch. Canvas area is intentionally blank for now.",
+      "From polished frontend builds to backend/API workflows that save time.",
+    ctaLabel: "Book a Call",
+    ctaHref: "/contact",
+    enableSlides: true,
   },
 };
