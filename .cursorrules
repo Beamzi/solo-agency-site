@@ -15,6 +15,7 @@ These rules are NOT suggestions. They are hard requirements.
 - MUST ask for explicit user approval before making an exception
 
 If there is any conflict, follow this order:
+
 1. This `.cursorrules` file
 2. `design-system.md`
 3. Existing local file patterns

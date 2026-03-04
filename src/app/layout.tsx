@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Sulphur_Point } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geistSans = Sulphur_Point({
+  variable: "--font-primary",
   subsets: ["latin"],
+  weight: ["400"],
+  // weight: ["300", "400", "500"], // or just one: weight: "400"
 });
 
 const geistMono = Geist_Mono({

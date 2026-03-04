@@ -8,8 +8,8 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-[var(--color-border)] bg-[var(--background)]">
-      <div className="relative mx-auto flex w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-sm)] py-[var(--spacing-sm)] sm:px-[var(--spacing-md)]">
+    <header className="h-[var(--navbar-height)] border-b border-[var(--color-border)] bg-[var(--background)]">
+      <div className="relative mx-auto flex h-full w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-sm)] sm:px-[var(--spacing-md)]">
         <div className="flex w-full items-center justify-between md:w-auto">
           <Link
             href={navigationContent.homeHref}
