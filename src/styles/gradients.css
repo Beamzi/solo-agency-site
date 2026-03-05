@@ -1,0 +1,69 @@
+.hero-panel-gradient {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-panel-gradient::before,
+.hero-panel-gradient::after {
+  content: "";
+  position: absolute;
+  inset: -200%;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero-panel-gradient::before {
+  background-image: repeating-linear-gradient(
+    30deg,
+    var(--color-secondary) 0%,
+    color-mix(in srgb, var(--color-secondary) 85%, var(--color-primary))
+      var(--spacing-xs),
+    color-mix(in srgb, var(--color-secondary) 70%, var(--color-primary))
+      var(--spacing-sm),
+    color-mix(in srgb, var(--color-secondary) 55%, var(--color-primary))
+      calc(var(--spacing-sm) + var(--spacing-xs)),
+    var(--color-primary) var(--spacing-lg)
+  );
+  opacity: 0.64;
+  transform: translate3d(0, 0, 0);
+  animation: heroPanelRainSweep 0.8s linear infinite;
+}
+
+.hero-panel-gradient::after {
+  background-image: repeating-linear-gradient(
+    30deg,
+    color-mix(in srgb, var(--color-secondary) 82%, var(--color-primary)) 0%,
+    color-mix(in srgb, var(--color-secondary) 68%, var(--color-primary))
+      var(--spacing-xs),
+    color-mix(in srgb, var(--color-secondary) 52%, var(--color-primary))
+      var(--spacing-sm),
+    var(--color-primary) var(--spacing-lg)
+  );
+  opacity: 0.18;
+  transform: translate3d(
+    calc(var(--spacing-xs) * -0.25),
+    calc(var(--spacing-xs) * 0.2),
+    0
+  );
+  animation: heroPanelRainSweep 0.9s linear infinite;
+}
+
+.hero-panel-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes heroPanelRainSweep {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(
+      calc(var(--spacing-sm) * -1),
+      calc(var(--spacing-sm) * 1.732050808),
+      0
+    );
+  }
+}

@@ -6,7 +6,7 @@ import { heroPreviewContent } from "@/data/sections/hero-preview";
 export function HeroPanel() {
   return (
     <section
-      className="h-[calc(100vh-var(--navbar-height))] bg-[var(--background)]"
+      className="h-[calc(100vh-var(--navbar-height))] bg-[var(--background)]  hero-panel-gradient "
       aria-label="Hero"
     >
       <div className="box-border mx-auto grid h-full w-full max-w-[var(--content-wide-max-width)] grid-cols-1 gap-[var(--spacing-md)] px-[var(--spacing-sm)] py-[var(--spacing-md)] sm:px-[var(--spacing-md)] lg:grid-cols-2 lg:gap-[var(--spacing-lg)]">
@@ -20,7 +20,7 @@ export function HeroPanel() {
           <div>
             <Link
               href={homeContent.hero.ctaHref}
-              className="inline-flex h-[var(--spacing-xl)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-md)] text-sm font-semibold text-[var(--foreground)] hover:bg-[var(--background-elevated-high)]"
+              className="btn-primary h-[var(--spacing-xl)] items-center justify-center px-[var(--spacing-md)]"
             >
               {homeContent.hero.ctaLabel}
             </Link>

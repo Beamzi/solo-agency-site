@@ -93,7 +93,7 @@ export function Navbar() {
               <Link
                 href={navigationContent.ctaHref}
                 onClick={() => setIsMenuOpen(false)}
-                className="inline-flex w-full justify-end rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-right text-sm font-semibold text-[var(--foreground)] hover:bg-[var(--background-elevated-high)] md:w-auto md:justify-start md:text-left"
+                className="btn-primary w-full justify-end px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-right md:w-auto md:justify-start md:text-left"
               >
                 {navigationContent.ctaLabel}
               </Link>

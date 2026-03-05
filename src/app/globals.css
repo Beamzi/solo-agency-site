@@ -7,8 +7,8 @@
   --foreground: #171717;
 
   /* Colors */
-  --color-primary: #a1bf36;
-  --color-secondary: #1261a6;
+  --color-primary: #bf364b;
+  --color-secondary: #5c3a94;
   --color-muted: #9ca3af;
   --color-border: #e5e7eb;
   --color-border-dashed: #bab9b9; /* neutral-600 for dashed lines in light mode */
@@ -101,4 +101,40 @@ html {
 
 /* Custom component classes using @apply */
 @layer components {
+  .btn-primary {
+    @apply inline-flex rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] text-sm font-semibold text-[var(--foreground)] hover:bg-[var(--background-elevated-high)];
+  }
+
+  .btn-secondary {
+    @apply inline-flex h-[var(--spacing-xl)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)] px-[var(--spacing-sm)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated-high)];
+  }
+
+  .input-field {
+    @apply border-[var(--border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] rounded-[var(--radius-md)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
+  }
+
+  .focus-outline {
+    outline: 2px solid #a3a3a3; /* neutral-400 for light mode */
+    outline-offset: -4px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .focus-outline {
+      outline-color: #262626; /* neutral-800 for dark mode */
+    }
+  }
+}
+
+/* Outside @layer so it overrides CSS module card styles (testimonial + feature carousels). */
+.card-hovered {
+  transition:
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+}
+
+.card-hovered:hover {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 12px 24px 0,
+    color-mix(in srgb, var(--color-primary) 30%, transparent);
 }

@@ -75,7 +75,7 @@ export function HeroPreviewPanel({
                 previousIndex === 0 ? totalSlides - 1 : previousIndex - 1,
               )
             }
-            className="inline-flex h-[var(--spacing-xl)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)] px-[var(--spacing-sm)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated-high)]"
+            className="btn-secondary"
             aria-label={content.controls.previousLabel}
           >
             {content.controls.previousLabel}
@@ -104,7 +104,7 @@ export function HeroPreviewPanel({
                 previousIndex === totalSlides - 1 ? 0 : previousIndex + 1,
               )
             }
-            className="inline-flex h-[var(--spacing-xl)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)] px-[var(--spacing-sm)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated-high)]"
+            className="btn-secondary"
             aria-label={content.controls.nextLabel}
           >
             {content.controls.nextLabel}
