@@ -1,0 +1,41 @@
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 135deg;
+  inherits: false;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rotateAngle {
+  to {
+    --angle: 495deg;
+  }
+}
+
+.parallax-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    var(--angle),
+    var(--color-primary),
+    var(--color-secondary),
+    color-mix(in oklch, var(--color-primary), var(--color-secondary) 50%),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  animation:
+    gradientShift 8s ease infinite,
+    rotateAngle 8s linear infinite;
+}

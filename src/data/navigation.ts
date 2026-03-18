@@ -10,9 +10,9 @@ export const navigationContent = {
     {
       label: "Services",
       subItems: [
-        { label: "Web Design", href: "/services/web-design" },
-        { label: "Development", href: "/services/development" },
-        { label: "Brand Strategy", href: "/services/brand-strategy" },
+        { label: "Web Design", href: "/web-design" },
+        { label: "Development", href: "/development" },
+        { label: "SEO & Brand Strategy", href: "/seo-brand-strategy" },
       ],
     },
     { label: "Case Studies", href: "/case-studies" },

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Sulphur_Point } from "next/font/google";
 import "./globals.css";
 import "../styles/gradients.css";
 import "../styles/button-gradient.css";
+import "../styles/parallax-bg.css";
 import { Navbar } from "@/components/navbar";
 
 const geistSans = Sulphur_Point({

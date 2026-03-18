@@ -1,40 +1,40 @@
 export const processSectionContent = {
   eyebrow: "How It Works",
-  title: "A Simple Path to a Custom Shed",
+  title: "Our Website Design and Launch Process",
   subtitle:
-    "Design your shed with our online tool, submit for pricing, and let us handle the build from there.",
+    "From planning to launch, we keep the process straightforward and collaborative so you always know what comes next.",
   cta: {
-    label: "Get started",
-    href: "/design-shed",
+    label: "Start your project",
+    href: "/contact",
   },
   steps: [
-    {
+    { 
       step: "Step 1",
       icon: "design",
-      title: "Design Your Shed",
+      title: "Discovery & Strategy",
       description:
-        "Use our 3D configurator to choose the size, layout, doors, and finishes.",
+        "We learn about your business, goals, and audience, then map a clear plan for what your site needs to do.",
     },
     {
       step: "Step 2",
       icon: "submit",
-      title: "Submit for Quote",
+      title: "UX & Visual Design",
       description:
-        "Send your design and contact details so we can prepare a detailed estimate.",
+        "We organize your pages and create design mockups that match your brand and make the user journey easy to follow.",
     },
     {
       step: "Step 3",
       icon: "review",
-      title: "Engineering Review",
+      title: "Build & Content Integration",
       description:
-        "We confirm specs, site needs, and timeline before moving into production.",
+        "We build the site, add your content, and set up essentials like forms, mobile responsiveness, and search visibility.",
     },
     {
       step: "Step 4",
       icon: "delivery",
-      title: "Manufacture & Delivery",
+      title: "QA, Launch & Deployment",
       description:
-        "Your shed is built to spec and delivered ready for installation.",
+        "After final checks and your approval, we launch the site and stay close to ensure everything goes live smoothly.",
     },
   ],
 };

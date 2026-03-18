@@ -17,6 +17,8 @@
   --color-foreground-dark: #ededed;
   --color-muted-dark: #52525b;
 
+  --angle: 135deg;
+
   /* Border */
   --border: 1px solid #d4d4d4; /* neutral-300 for light mode */
   --btn-border: var(--background-elevated-high);

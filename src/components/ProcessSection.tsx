@@ -3,13 +3,12 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 
 import {
-  FaArrowRight,
+  FaBullseye,
   FaChevronDown,
   FaChevronRight,
-  FaClipboardCheck,
-  FaDraftingCompass,
-  FaPaperPlane,
-  FaTruck,
+  FaCode,
+  FaLaptopCode,
+  FaRocket,
 } from "react-icons/fa";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
@@ -21,10 +20,10 @@ import {
 } from "@/lib/viewport-reveal";
 
 const iconMap = {
-  design: FaDraftingCompass,
-  submit: FaPaperPlane,
-  review: FaClipboardCheck,
-  delivery: FaTruck,
+  design: FaBullseye,
+  submit: FaLaptopCode,
+  review: FaCode,
+  delivery: FaRocket,
 };
 
 const STEP_DURATION_MS = 1500;
@@ -112,7 +111,7 @@ export default function ProcessSection({ content }: ProcessSectionProps) {
           <div className="relative flex flex-col gap-[var(--spacing-md)] lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-stretch lg:gap-[var(--spacing-sm)]">
             {process.steps.map((step, index) => {
               const Icon =
-                iconMap[step.icon as keyof typeof iconMap] ?? FaTruck;
+                iconMap[step.icon as keyof typeof iconMap] ?? FaRocket;
               const isLast = index === process.steps.length - 1;
               const isActive = activeIndex === index;
 

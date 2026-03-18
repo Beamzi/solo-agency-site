@@ -6,7 +6,7 @@ import { heroPreviewContent } from "@/data/sections/hero-preview";
 export function HeroPanel() {
   return (
     <section
-      className="h-[calc(100vh-var(--navbar-height))] bg-[var(--background)]  hero-panel-gradient "
+      className="h-[calc(100vh-var(--navbar-height))] bg-[var(--background)]  "
       aria-label="Hero"
     >
       <div className="box-border mx-auto grid h-full w-full max-w-[var(--content-wide-max-width)] grid-cols-1 gap-[var(--spacing-md)] px-[var(--spacing-sm)] py-[var(--spacing-md)] sm:px-[var(--spacing-md)] lg:grid-cols-2 lg:gap-[var(--spacing-lg)]">
