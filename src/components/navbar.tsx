@@ -1,14 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navigationContent } from "@/data/navigation";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const navRef = useRef<HTMLElement | null>(null);
+
+  const closeNavbarMenus = () => {
+    setIsMenuOpen(false);
+    if (!navRef.current) {
+      return;
+    }
+    navRef.current
+      .querySelectorAll("details[open]")
+      .forEach((detailsElement) => detailsElement.removeAttribute("open"));
+  };
+
+  useEffect(() => {
+    closeNavbarMenus();
+    // Keep navbar UI state reset after route transitions.
+  }, [pathname]);
 
   return (
-    <header className="box-border h-[var(--navbar-height)] border-b border-[var(--color-border)] bg-[var(--background)]">
+    <header
+      ref={navRef}
+      className="sticky top-0 z-[var(--z-navbar)] box-border h-[var(--navbar-height)] border-b border-[var(--color-border)] bg-[var(--background)]"
+    >
       <div className="relative mx-auto flex h-full w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-sm)] sm:px-[var(--spacing-md)]">
         <div className="flex w-full items-center justify-between md:w-auto">
           <Link
@@ -69,7 +90,7 @@ export function Navbar() {
                         <li key={subItem.label} className="w-full">
                           <Link
                             href={subItem.href}
-                            onClick={() => setIsMenuOpen(false)}
+                            onClick={closeNavbarMenus}
                             className="block rounded-[var(--radius-sm)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-right text-sm text-[var(--foreground)] hover:bg-[var(--background-elevated)] md:text-left"
                           >
                             {subItem.label}
@@ -81,7 +102,7 @@ export function Navbar() {
                 ) : (
                   <Link
                     href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={closeNavbarMenus}
                     className="inline-flex w-full justify-end rounded-[var(--radius-md)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-right text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated)] md:w-auto md:justify-start md:text-left"
                   >
                     {item.label}
@@ -92,7 +113,7 @@ export function Navbar() {
             <li className="md:ml-[var(--spacing-xs)]">
               <Link
                 href={navigationContent.ctaHref}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeNavbarMenus}
                 className="btn-primary w-full justify-end px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-right md:w-auto md:justify-start md:text-left"
               >
                 {navigationContent.ctaLabel}

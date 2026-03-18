@@ -45,6 +45,7 @@
   --content-max-width: 72rem; /* main content width (Tailwind 6xl); change here to affect all sections */
   --content-wide-max-width: 90rem; /* 22.5rem */
   --navbar-height: 5rem;
+  --z-navbar: 40;
   --footer-height: 4.5rem;
   --feature-card-min-height: 12rem;
   --split-media-min-height: 15rem;
@@ -91,9 +92,11 @@
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
 /* Always reserve scrollbar space so layout is consistent when navigating between scrolling and non-scrolling pages */

@@ -25,7 +25,7 @@ export default function ServicesSection({ content }: ServicesSectionProps) {
     getViewportRevealVariants(prefersReducedMotion);
 
   return (
-    <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
+    <section className="py-[var(--spacing-xl)]">
       <motion.div
         className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
         variants={containerVariants}

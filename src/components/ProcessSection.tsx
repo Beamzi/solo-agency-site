@@ -81,10 +81,7 @@ export default function ProcessSection({ content }: ProcessSectionProps) {
   }, [isInView, process.steps.length]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-[var(--background)] py-[var(--spacing-xl)]"
-    >
+    <section ref={sectionRef} className="py-[var(--spacing-xl)]">
       <div className="mx-auto w-full  max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <motion.div
           className="flex flex-col gap-[var(--spacing-md)] lg:grid lg:grid-cols-1 lg:grid-rows-[auto_1fr] lg:gap-[var(--spacing-xl)]"
@@ -119,51 +116,55 @@ export default function ProcessSection({ content }: ProcessSectionProps) {
                 <Fragment key={step.title}>
                   <motion.div
                     variants={itemVariants}
-                    className={`${styles.processCard} relative z-10 flex min-h-0 flex-col gap-[var(--spacing-sm)] border-2 duration-500 ease-in-out`}
-                    style={{
-                      borderColor: isActive
-                        ? "var(--color-primary)"
-                        : "transparent",
-                      boxShadow: `var(--shadow-md), 0 0 0 var(--spacing-xs) var(--background)`,
-                    }}
+                    className={`${styles.processCardFrame} relative z-10 h-full`}
                   >
-                    <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
-                        <motion.span
-                          className="inline-flex items-center justify-center text-[var(--color-primary)]"
-                          animate={
-                            isActive
-                              ? {
-                                  scale: [1, 1.2, 1],
-                                  color: [
-                                    "var(--color-primary)",
-                                    "#ffffff",
-                                    "var(--color-primary)",
-                                  ],
-                                }
-                              : {
-                                  scale: 1,
-                                  color: "var(--color-primary)",
-                                }
-                          }
-                          transition={{
-                            duration: 0.5,
-                            ease: "easeInOut",
-                          }}
-                        >
-                          <Icon className="text-2xl text-current" />
-                        </motion.span>
+                    <div
+                      className={`${styles.processCard} flex h-full min-h-[var(--feature-card-min-height)] flex-col gap-[var(--spacing-sm)] border-2 duration-500 ease-in-out`}
+                      style={{
+                        borderColor: isActive
+                          ? "var(--color-primary)"
+                          : "var(--color-border)",
+                        boxShadow: "var(--shadow-md)",
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
+                          <motion.span
+                            className="inline-flex items-center justify-center text-[var(--color-primary)]"
+                            animate={
+                              isActive
+                                ? {
+                                    scale: [1, 1.2, 1],
+                                    color: [
+                                      "var(--color-primary)",
+                                      "#ffffff",
+                                      "var(--color-primary)",
+                                    ],
+                                  }
+                                : {
+                                    scale: 1,
+                                    color: "var(--color-primary)",
+                                  }
+                            }
+                            transition={{
+                              duration: 0.5,
+                              ease: "easeInOut",
+                            }}
+                          >
+                            <Icon className="text-2xl text-current" />
+                          </motion.span>
+                        </div>
+                        <span className="rounded-[var(--radius-md)] bg-[var(--background)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-xs font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+                          {step.step}
+                        </span>
                       </div>
-                      <span className="rounded-[var(--radius-md)] bg-[var(--background)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-xs font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-                        {step.step}
-                      </span>
+                      <h3 className="text-xl font-semibold text-[var(--foreground)]">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-[var(--color-muted)]">
+                        {step.description}
+                      </p>
                     </div>
-                    <h3 className="text-xl font-semibold text-[var(--foreground)]">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm text-[var(--color-muted)]">
-                      {step.description}
-                    </p>
                   </motion.div>
                   {!isLast && (
                     <div className="hidden w-10 items-center justify-center text-[var(--color-muted)] lg:flex">

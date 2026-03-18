@@ -18,7 +18,7 @@ export default function ServiceDetails({ content }: ServiceDetailsProps) {
     getViewportRevealVariants(prefersReducedMotion);
 
   return (
-    <main className="bg-[var(--background)]">
+    <main>
       <section className="py-[var(--spacing-xl)]">
         <motion.div
           className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"

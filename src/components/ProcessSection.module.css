@@ -1,3 +1,21 @@
+.processCardFrame {
+  position: relative;
+  border-radius: calc(var(--radius-lg) + calc(var(--spacing-xs) / 2));
+  padding: calc(var(--spacing-xs) / 2);
+  background: linear-gradient(
+    var(--angle),
+    var(--color-primary),
+    var(--color-secondary),
+    color-mix(in oklch, var(--color-primary), var(--color-secondary) 50%),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  animation:
+    gradientShift 8s ease infinite,
+    rotateAngle 8s linear infinite;
+}
+
 .processCard {
   background: var(--background-elevated);
   border: var(--border);
