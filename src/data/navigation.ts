@@ -1,5 +1,5 @@
 export const navigationContent = {
-  siteName: "LaunchCraft",
+  siteName: "InterLock",
   homeHref: "/",
   menuAriaLabel: "Primary",
   openMenuLabel: "Open menu",
