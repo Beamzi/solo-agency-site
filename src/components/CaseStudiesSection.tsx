@@ -1,12 +1,32 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { caseStudiesPageContent } from "@/data/sections/case-studies";
+import {
+  defaultViewport,
+  getViewportRevealVariants,
+} from "@/lib/viewport-reveal";
 
 export default function CaseStudiesSection() {
+  const prefersReducedMotion = useReducedMotion();
+  const { container: containerVariants, item: itemVariants } =
+    getViewportRevealVariants(prefersReducedMotion);
+
   return (
     <section className="py-[var(--spacing-xl)]">
-      <div className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
-        <header className="flex flex-col gap-[var(--spacing-sm)]">
+      <motion.div
+        className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={defaultViewport}
+      >
+        <motion.header
+          className="flex flex-col gap-[var(--spacing-sm)]"
+          variants={itemVariants}
+        >
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
             {caseStudiesPageContent.hero.eyebrow}
           </p>
@@ -16,13 +36,14 @@ export default function CaseStudiesSection() {
           <p className="max-w-3xl text-base text-[var(--foreground)] md:text-lg">
             {caseStudiesPageContent.hero.description}
           </p>
-        </header>
+        </motion.header>
 
         <div className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2 lg:grid-cols-3">
           {caseStudiesPageContent.caseStudies.map((caseStudy) => (
-            <article
+            <motion.article
               key={caseStudy.client}
               className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+              variants={itemVariants}
             >
               <div className="relative h-[calc(var(--spacing-xl)*4)] overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)]">
                 <Image
@@ -43,7 +64,9 @@ export default function CaseStudiesSection() {
                 </h2>
               </div>
 
-              <p className="text-sm text-[var(--foreground)]">{caseStudy.brief}</p>
+              <p className="text-sm text-[var(--foreground)]">
+                {caseStudy.brief}
+              </p>
 
               <ul className="flex list-disc flex-col gap-[calc(var(--spacing-xs)/2)] pl-[var(--spacing-md)] text-sm text-[var(--color-muted)]">
                 {caseStudy.outcomes.map((outcome) => (
@@ -59,11 +82,14 @@ export default function CaseStudiesSection() {
                   {caseStudiesPageContent.caseStudyCtaLabel}
                 </Link>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
 
-        <section className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]">
+        <motion.section
+          className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+          variants={itemVariants}
+        >
           <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
             {caseStudiesPageContent.closing.title}
           </h2>
@@ -78,8 +104,8 @@ export default function CaseStudiesSection() {
               {caseStudiesPageContent.closing.ctaLabel}
             </Link>
           </div>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
     </section>
   );
 }

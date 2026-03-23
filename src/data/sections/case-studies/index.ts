@@ -1,13 +1,24 @@
 import { fieldlineInteriorsCaseStudy } from "@/data/sections/case-studies/fieldline-interiors";
+import { hpgShedsPatiosCaseStudy } from "@/data/sections/case-studies/hpg-sheds-patios";
+import { manaboardCaseStudy } from "@/data/sections/case-studies/manaboard";
 import {
   northbridgeLegalGroupCaseStudy,
   type CaseStudyDetailContent,
 } from "@/data/sections/case-studies/northbridge-legal-group";
 
-const caseStudyDetails = [
+const caseStudyDetails: CaseStudyDetailContent[] = [
+  manaboardCaseStudy,
+  hpgShedsPatiosCaseStudy,
   northbridgeLegalGroupCaseStudy,
   fieldlineInteriorsCaseStudy,
 ];
+
+const sortedCaseStudyDetails = [...caseStudyDetails].sort((a, b) => {
+  const aPriority = a.featuredPriority ?? Number.POSITIVE_INFINITY;
+  const bPriority = b.featuredPriority ?? Number.POSITIVE_INFINITY;
+
+  return aPriority - bPriority;
+});
 
 export const caseStudiesPageContent = {
   hero: {
@@ -16,7 +27,7 @@ export const caseStudiesPageContent = {
     description:
       "A snapshot of recent website redesign and growth-focused builds. Each project highlights the problem, the approach, and the commercial outcome.",
   },
-  caseStudies: caseStudyDetails.map((caseStudy) => ({
+  caseStudies: sortedCaseStudyDetails.map((caseStudy) => ({
     slug: caseStudy.slug,
     client: caseStudy.client,
     sector: caseStudy.sector,

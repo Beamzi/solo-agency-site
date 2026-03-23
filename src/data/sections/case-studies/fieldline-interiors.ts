@@ -74,6 +74,14 @@ export const fieldlineInteriorsCaseStudy = {
       alt: "Placeholder screenshot of Fieldline single project page",
     },
   ],
+  meta: {
+    title: "Fieldline Interiors Case Study | InterLock",
+    description:
+      "How we redesigned Fieldline Interiors with a portfolio-led web experience that improved qualification and quote request conversion.",
+    image: "/window.svg",
+  },
+  liveSiteLabel: caseStudyDetailLabels.liveSite,
+  liveSiteUrl: "",
   nextCta: {
     title: "Need A Portfolio Website That Sells The Work?",
     description:

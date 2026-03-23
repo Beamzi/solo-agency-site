@@ -72,6 +72,14 @@ export const northbridgeLegalGroupCaseStudy = {
       alt: "Placeholder screenshot of Northbridge service page concept",
     },
   ],
+  meta: {
+    title: "Northbridge Legal Group Case Study | InterLock",
+    description:
+      "How we repositioned Northbridge Legal Group with clearer service pathways, stronger trust cues, and improved enquiry conversion flow.",
+    image: "/window.svg",
+  },
+  liveSiteLabel: caseStudyDetailLabels.liveSite,
+  liveSiteUrl: "",
   nextCta: {
     title: "Planning A Similar Website Reposition?",
     description:
@@ -83,4 +91,14 @@ export const northbridgeLegalGroupCaseStudy = {
   },
 };
 
-export type CaseStudyDetailContent = typeof northbridgeLegalGroupCaseStudy;
+type BaseCaseStudyDetailContent = typeof northbridgeLegalGroupCaseStudy;
+
+export type CaseStudyDetailContent = BaseCaseStudyDetailContent & {
+  featuredPriority?: 1 | 2 | 3;
+  meta?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    noIndex?: boolean;
+  };
+};

@@ -4,6 +4,7 @@ export const caseStudyDetailLabels = {
   approach: "Our Approach",
   results: "Results",
   gallery: "Screens and Concepts",
+  liveSite: "Visit live site",
 } as const;
 
 export type CaseStudyDetailLabels = typeof caseStudyDetailLabels;

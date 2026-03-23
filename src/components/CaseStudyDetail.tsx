@@ -1,17 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import type { CaseStudyDetailContent } from "@/data/sections/case-studies";
+import {
+  defaultViewport,
+  getViewportRevealVariants,
+} from "@/lib/viewport-reveal";
 
 interface CaseStudyDetailProps {
   content: CaseStudyDetailContent;
 }
 
 export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const { container: containerVariants, item: itemVariants } =
+    getViewportRevealVariants(prefersReducedMotion);
+
   return (
     <main>
       <section className="py-[var(--spacing-xl)]">
-        <div className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
-          <header className="flex flex-col gap-[var(--spacing-sm)]">
+        <motion.div
+          className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={defaultViewport}
+        >
+          <motion.header
+            className="flex flex-col gap-[var(--spacing-sm)]"
+            variants={itemVariants}
+          >
             <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
               {content.sector}
             </p>
@@ -24,9 +44,12 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
             <p className="text-sm text-[var(--color-muted)]">
               {content.timelineLabel}: {content.timeline}
             </p>
-          </header>
+          </motion.header>
 
-          <div className="relative h-[calc(var(--spacing-xl)*6)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)]">
+          <motion.div
+            className="relative h-[calc(var(--spacing-xl)*6)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)]"
+            variants={itemVariants}
+          >
             <Image
               src={content.heroImage.src}
               alt={content.heroImage.alt}
@@ -35,9 +58,12 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
               className="object-cover"
               priority
             />
-          </div>
+          </motion.div>
 
-          <section className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]">
+          <motion.section
+            className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+            variants={itemVariants}
+          >
             <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
               {content.challenge.title}
             </h2>
@@ -46,57 +72,69 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="flex flex-col gap-[var(--spacing-md)]">
+          <motion.section
+            className="flex flex-col gap-[var(--spacing-md)]"
+            variants={itemVariants}
+          >
             <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
               {content.approach.title}
             </h2>
             <div className="grid grid-cols-1 gap-[var(--spacing-sm)] md:grid-cols-3">
               {content.approach.items.map((item) => (
-                <article
+                <motion.article
                   key={item.title}
                   className="flex flex-col gap-[var(--spacing-xs)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+                  variants={itemVariants}
                 >
                   <h3 className="text-lg font-semibold text-[var(--foreground)]">
                     {item.title}
                   </h3>
                   <p className="text-sm text-[var(--foreground)]">{item.description}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="flex flex-col gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]">
+          <motion.section
+            className="flex flex-col gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+            variants={itemVariants}
+          >
             <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
               {content.results.title}
             </h2>
             <div className="grid grid-cols-1 gap-[var(--spacing-sm)] md:grid-cols-3">
               {content.results.metrics.map((metric) => (
-                <article
+                <motion.article
                   key={metric.label}
                   className="flex flex-col gap-[calc(var(--spacing-xs)/2)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)] p-[var(--spacing-sm)]"
+                  variants={itemVariants}
                 >
                   <p className="text-sm text-[var(--color-muted)]">{metric.label}</p>
                   <p className="text-2xl font-semibold text-[var(--foreground)]">
                     {metric.value}
                   </p>
                   <p className="text-sm text-[var(--foreground)]">{metric.detail}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
             <p className="text-base text-[var(--foreground)]">{content.results.conclusion}</p>
-          </section>
+          </motion.section>
 
-          <section className="flex flex-col gap-[var(--spacing-md)]">
+          <motion.section
+            className="flex flex-col gap-[var(--spacing-md)]"
+            variants={itemVariants}
+          >
             <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
               {content.galleryTitle}
             </h2>
             <div className="grid grid-cols-1 gap-[var(--spacing-sm)] md:grid-cols-2">
               {content.gallery.map((image) => (
-                <article
+                <motion.article
                   key={image.alt}
                   className="relative h-[calc(var(--spacing-xl)*4)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)]"
+                  variants={itemVariants}
                 >
                   <Image
                     src={image.src}
@@ -105,12 +143,15 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
-                </article>
+                </motion.article>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]">
+          <motion.section
+            className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+            variants={itemVariants}
+          >
             <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
               {content.nextCta.title}
             </h2>
@@ -130,9 +171,19 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
               >
                 {content.nextCta.secondaryLabel}
               </Link>
+              {content.liveSiteUrl ? (
+                <a
+                  href={content.liveSiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary px-[var(--spacing-md)]"
+                >
+                  {content.liveSiteLabel}
+                </a>
+              ) : null}
             </div>
-          </section>
-        </div>
+          </motion.section>
+        </motion.div>
       </section>
     </main>
   );
