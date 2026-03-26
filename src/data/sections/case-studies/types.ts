@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image";
+
 export type CaseStudyDetailContent = {
   slug: string;
   client: string;
@@ -7,7 +9,7 @@ export type CaseStudyDetailContent = {
   timelineLabel: string;
   summary: string;
   heroImage: {
-    src: string;
+    src: string | StaticImageData;
     alt: string;
   };
   challenge: {
@@ -32,13 +34,13 @@ export type CaseStudyDetailContent = {
   };
   galleryTitle: string;
   gallery: Array<{
-    src: string;
+    src: string | StaticImageData;
     alt: string;
   }>;
   meta?: {
     title?: string;
     description?: string;
-    image?: string;
+    image?: string | StaticImageData;
     noIndex?: boolean;
   };
   liveSiteLabel: string;

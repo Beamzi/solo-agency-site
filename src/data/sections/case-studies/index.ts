@@ -3,8 +3,10 @@ import { daymediaCaseStudy } from "@/data/sections/case-studies/daymedia";
 import { hpgShedsPatiosCaseStudy } from "@/data/sections/case-studies/hpg-sheds-patios";
 import { integratedAssetManagementSolutionsCaseStudy } from "@/data/sections/case-studies/integrated-asset-management-solutions";
 import { manaboardCaseStudy } from "@/data/sections/case-studies/manaboard";
+import { mrPureWaterCaseStudy } from "@/data/sections/case-studies/mr-pure-water";
 import { mtCottonRetreatCaseStudy } from "@/data/sections/case-studies/mt-cotton-retreat";
 import { navcubeCaseStudy } from "@/data/sections/case-studies/navcube";
+import { saSealingAndTilingCaseStudy } from "@/data/sections/case-studies/sa-sealing-and-tiling";
 import type { CaseStudyDetailContent } from "@/data/sections/case-studies/types";
 
 const caseStudyDetails: CaseStudyDetailContent[] = [
@@ -13,8 +15,10 @@ const caseStudyDetails: CaseStudyDetailContent[] = [
   disabilityHousingCentreCaseStudy,
   daymediaCaseStudy,
   integratedAssetManagementSolutionsCaseStudy,
+  mrPureWaterCaseStudy,
   mtCottonRetreatCaseStudy,
   navcubeCaseStudy,
+  saSealingAndTilingCaseStudy,
 ];
 
 const sortedCaseStudyDetails = [...caseStudyDetails].sort((a, b) => {

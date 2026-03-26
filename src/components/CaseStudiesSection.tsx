@@ -17,7 +17,7 @@ export default function CaseStudiesSection() {
   return (
     <section className="py-[var(--spacing-xl)]">
       <motion.div
-        className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
+        className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
@@ -38,14 +38,14 @@ export default function CaseStudiesSection() {
           </p>
         </motion.header>
 
-        <div className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2 xl:grid-cols-3">
           {caseStudiesPageContent.caseStudies.map((caseStudy) => (
             <motion.article
               key={caseStudy.client}
               className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
               variants={itemVariants}
             >
-              <div className="relative h-[calc(var(--spacing-xl)*4)] overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)]">
+              <div className="relative aspect-[2.1/1] w-full overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)]">
                 <Image
                   src={caseStudy.imageSrc}
                   alt={caseStudy.imageAlt}
