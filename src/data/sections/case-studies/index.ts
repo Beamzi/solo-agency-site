@@ -1,16 +1,20 @@
-import { fieldlineInteriorsCaseStudy } from "@/data/sections/case-studies/fieldline-interiors";
+import { disabilityHousingCentreCaseStudy } from "@/data/sections/case-studies/disability-housing-centre";
+import { daymediaCaseStudy } from "@/data/sections/case-studies/daymedia";
 import { hpgShedsPatiosCaseStudy } from "@/data/sections/case-studies/hpg-sheds-patios";
+import { integratedAssetManagementSolutionsCaseStudy } from "@/data/sections/case-studies/integrated-asset-management-solutions";
 import { manaboardCaseStudy } from "@/data/sections/case-studies/manaboard";
-import {
-  northbridgeLegalGroupCaseStudy,
-  type CaseStudyDetailContent,
-} from "@/data/sections/case-studies/northbridge-legal-group";
+import { mtCottonRetreatCaseStudy } from "@/data/sections/case-studies/mt-cotton-retreat";
+import { navcubeCaseStudy } from "@/data/sections/case-studies/navcube";
+import type { CaseStudyDetailContent } from "@/data/sections/case-studies/types";
 
 const caseStudyDetails: CaseStudyDetailContent[] = [
   manaboardCaseStudy,
   hpgShedsPatiosCaseStudy,
-  northbridgeLegalGroupCaseStudy,
-  fieldlineInteriorsCaseStudy,
+  disabilityHousingCentreCaseStudy,
+  daymediaCaseStudy,
+  integratedAssetManagementSolutionsCaseStudy,
+  mtCottonRetreatCaseStudy,
+  navcubeCaseStudy,
 ];
 
 const sortedCaseStudyDetails = [...caseStudyDetails].sort((a, b) => {

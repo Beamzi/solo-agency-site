@@ -1,4 +1,4 @@
-import type { CaseStudyDetailContent } from "@/data/sections/case-studies/northbridge-legal-group";
+import type { CaseStudyDetailContent } from "@/data/sections/case-studies/types";
 import { caseStudyDetailLabels } from "@/data/sections/case-studies/shared";
 
 export const manaboardCaseStudy = {
