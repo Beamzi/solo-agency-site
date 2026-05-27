@@ -28,37 +28,36 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
           whileInView="show"
           viewport={defaultViewport}
         >
-          <motion.header
-            className="flex flex-col gap-[var(--spacing-sm)]"
+          <motion.section
+            className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2"
             variants={itemVariants}
           >
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-              {content.sector}
-            </p>
-            <h1 className="max-w-4xl text-3xl font-semibold text-[var(--foreground)] md:text-5xl">
-              {content.client}
-            </h1>
-            <p className="max-w-3xl text-base text-[var(--foreground)] md:text-lg">
-              {content.summary}
-            </p>
-            <p className="text-sm text-[var(--color-muted)]">
-              {content.timelineLabel}: {content.timeline}
-            </p>
-          </motion.header>
+            <header className="flex flex-col justify-center gap-[var(--spacing-sm)]">
+              <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+                {content.sector}
+              </p>
+              <h1 className="max-w-4xl text-3xl font-semibold text-[var(--foreground)] md:text-5xl">
+                {content.client}
+              </h1>
+              <p className="max-w-3xl text-base text-[var(--foreground)] md:text-lg">
+                {content.summary}
+              </p>
+              <p className="text-sm text-[var(--color-muted)]">
+                {content.timelineLabel}: {content.timeline}
+              </p>
+            </header>
 
-          <motion.div
-            className="relative h-[calc(var(--spacing-xl)*6)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)]"
-            variants={itemVariants}
-          >
-            <Image
-              src={content.heroImage.src}
-              alt={content.heroImage.alt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 72rem"
-              className="object-cover"
-              priority
-            />
-          </motion.div>
+            <div className="relative h-[calc(var(--spacing-xl)*6)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)]">
+              <Image
+                src={content.heroImage.src}
+                alt={content.heroImage.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </motion.section>
 
           <motion.section
             className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"

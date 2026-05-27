@@ -9,6 +9,7 @@ import { navigationContent } from "@/data/navigation";
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [transitionsEnabled, setTransitionsEnabled] = useState(false);
   const [openSubmenuLabel, setOpenSubmenuLabel] = useState<string | null>(null);
   const pathname = usePathname();
   const mobileMenuTopClass = isScrolled
@@ -29,21 +30,63 @@ export function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
+    const compactEnterThreshold = 10;
+    const compactExitThreshold = 2;
+    let isTicking = false;
+    let scrolledState = false;
+
     const updateScrolledState = () => {
-      setIsScrolled(window.scrollY > 0);
+      const currentScrollY = window.scrollY;
+      const nextScrolledState = scrolledState
+        ? currentScrollY > compactExitThreshold
+        : currentScrollY >= compactEnterThreshold;
+
+      if (nextScrolledState !== scrolledState) {
+        scrolledState = nextScrolledState;
+        setIsScrolled(nextScrolledState);
+      }
+    };
+
+    const handleScroll = () => {
+      if (isTicking) {
+        return;
+      }
+
+      isTicking = true;
+      window.requestAnimationFrame(() => {
+        updateScrolledState();
+        isTicking = false;
+      });
     };
 
     updateScrolledState();
-    window.addEventListener("scroll", updateScrolledState, { passive: true });
+    // Wait one paint so initial scroll-state sync never animates.
+    window.requestAnimationFrame(() => {
+      setTransitionsEnabled(true);
+    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", updateScrolledState);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const handleBreakpointChange = () => {
+      closeNavbarMenus();
+    };
+
+    mediaQuery.addEventListener("change", handleBreakpointChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleBreakpointChange);
     };
   }, []);
 
   return (
     <header
-      className={`sticky top-0 z-[var(--z-navbar)] box-border border-b border-[var(--color-border)] bg-[var(--background)] transition-[height] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${isScrolled ? "h-[var(--navbar-height-compact)]" : "h-[var(--navbar-height)]"}`}
+      className={`sticky top-0 z-[var(--z-navbar)] box-border border-b border-[var(--color-border)] bg-[var(--background-elevated)] transition-[height] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} ${isScrolled ? "h-[var(--navbar-height-compact)]" : "h-[var(--navbar-height)]"}`}
     >
       <div className="relative mx-auto flex h-full w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-sm)] sm:px-[var(--spacing-md)]">
         <div className="flex w-full items-center justify-between md:w-auto">
@@ -85,7 +128,7 @@ export function Navbar() {
         <nav
           id="primary-navigation"
           aria-label={navigationContent.menuAriaLabel}
-          className={`${isMenuOpen ? "block" : "hidden"} ${mobileMenuTopClass} absolute right-[var(--spacing-sm)] z-20 w-max min-w-[calc(var(--spacing-xl)*4)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated-high)] p-[var(--spacing-xs)] shadow-[var(--shadow-md)] transition-[top] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] sm:right-[var(--spacing-md)] md:static md:block md:min-w-0 md:w-auto md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:transition-none`}
+          className={`${isMenuOpen ? "block" : "hidden"} ${mobileMenuTopClass} absolute right-[var(--spacing-sm)] z-20 w-max min-w-[calc(var(--spacing-xl)*4)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated-high)] p-[var(--spacing-xs)] shadow-[var(--shadow-md)] transition-[top] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} sm:right-[var(--spacing-md)] md:static md:block md:min-w-0 md:w-full md:flex-1 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:transition-none`}
         >
           <div
             aria-hidden="true"
@@ -124,7 +167,7 @@ export function Navbar() {
             ))}
           </div>
 
-          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:mx-0 md:w-auto md:flex-row md:items-center md:justify-end md:gap-[var(--spacing-sm)]">
+          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:relative md:mx-0 md:w-full md:flex-row md:items-center md:justify-center md:gap-[var(--spacing-sm)]">
             {navigationContent.items.map((item, index) => (
               <li key={item.label} className="w-full md:w-auto">
                 {"subItems" in item ? (
@@ -140,7 +183,9 @@ export function Navbar() {
                             aria-controls={`submenu-${index}`}
                             onClick={() =>
                               setOpenSubmenuLabel((previousLabel) =>
-                                previousLabel === item.label ? null : item.label,
+                                previousLabel === item.label
+                                  ? null
+                                  : item.label,
                               )
                             }
                             className="flex w-full cursor-pointer items-center rounded-[var(--radius-md)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated)] md:w-auto"
@@ -162,8 +207,11 @@ export function Navbar() {
                                 ? { opacity: 1, y: 0, scaleY: 1 }
                                 : { opacity: 0, y: -8, scaleY: 0.98 }
                             }
-                            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                            className={`w-max min-w-full origin-top rounded-[var(--radius-md)] bg-[var(--background-elevated-high)] md:absolute md:left-0 ${desktopSubmenuTopClass} md:mt-0 md:w-auto md:min-w-[calc(var(--spacing-xl)*4)] md:z-20 md:transition-[top] md:[transition-duration:var(--navbar-height-transition-duration)] md:[transition-timing-function:var(--navbar-height-transition-easing)] ${isSubmenuOpen ? "mt-[var(--spacing-xs)] max-h-[calc(var(--spacing-xl)*6)] visible pointer-events-auto border border-[var(--color-border)] p-[var(--spacing-xs)] shadow-[var(--shadow-sm)]" : "mt-0 max-h-0 invisible pointer-events-none overflow-hidden border-0 p-0 shadow-none"}`}
+                            transition={{
+                              duration: 0.24,
+                              ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className={`w-max min-w-full origin-top rounded-[var(--radius-md)] bg-[var(--background)] md:absolute md:left-0 ${desktopSubmenuTopClass} md:mt-0 md:w-auto md:min-w-[calc(var(--spacing-xl)*4)] md:z-20 md:transition-[top] md:[transition-duration:var(--navbar-height-transition-duration)] md:[transition-timing-function:var(--navbar-height-transition-easing)] ${isSubmenuOpen ? "mt-[var(--spacing-xs)] max-h-[calc(var(--spacing-xl)*6)] visible pointer-events-auto border border-[var(--color-border)] p-[var(--spacing-xs)] shadow-[var(--shadow-sm)]" : "mt-0 max-h-0 invisible pointer-events-none overflow-hidden border-0 p-0 shadow-none"}`}
                           >
                             {item.subItems.map((subItem) => (
                               <li key={subItem.label} className="w-full">
@@ -193,7 +241,7 @@ export function Navbar() {
                 )}
               </li>
             ))}
-            <li className="md:ml-[var(--spacing-xs)]">
+            <li className="md:absolute md:right-0 md:ml-0">
               <Link
                 href={navigationContent.ctaHref}
                 onClick={closeNavbarMenus}

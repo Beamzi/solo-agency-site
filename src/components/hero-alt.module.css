@@ -1,0 +1,18 @@
+.section {
+  position: relative;
+}
+
+.section::before {
+  content: none;
+}
+
+.spotlightCard {
+  background: color-mix(in srgb, var(--background-elevated) 88%, transparent);
+  border-color: color-mix(in srgb, var(--color-border) 58%, transparent);
+  box-shadow:
+    var(--shadow-sm),
+    0 0 0 1px color-mix(in srgb, var(--color-border) 22%, transparent),
+    0 var(--spacing-sm) var(--spacing-xl)
+      color-mix(in srgb, var(--hero-image-overlay) 42%, transparent);
+  backdrop-filter: blur(2px);
+}

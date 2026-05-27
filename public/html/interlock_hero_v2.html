@@ -1,0 +1,155 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --violet: #534AB7; --violet-lt: #7F77DD;
+    --ink: #0d0c14; --ink-2: #3a3750; --ink-3: #6b6880;
+    --surface: #fafaf9;
+    --mono: 'DM Mono', monospace; --sans: 'DM Sans', sans-serif;
+  }
+  .page { font-family: var(--sans); background: var(--surface); color: var(--ink); }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 54px;
+    border-bottom: 0.5px solid rgba(83,74,183,0.12);
+    animation: fadeDown 0.5s ease both;
+  }
+  .logo {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 12px; color: var(--ink-3); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    padding: 7px 16px; background: var(--violet); color: #fff;
+    border: none; border-radius: 4px; cursor: pointer; transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  .hero {
+    min-height: 420px;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(83,74,183,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(83,74,183,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 640px; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--violet-lt);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 1.75rem;
+    animation: fadeUp 0.6s 0.15s ease both; opacity: 0;
+  }
+  .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--violet-lt); }
+
+  .headline {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 1.75rem;
+    animation: fadeUp 0.6s 0.25s ease both; opacity: 0;
+  }
+  .headline em { font-style: italic; font-weight: 300; color: var(--violet); }
+
+  .subline {
+    font-size: 15px; font-weight: 300; color: var(--ink-3);
+    line-height: 1.65; max-width: 480px; margin-bottom: 2.25rem;
+    animation: fadeUp 0.6s 0.35s ease both; opacity: 0;
+  }
+
+  .cta-row {
+    display: flex; align-items: center; gap: 1.25rem;
+    animation: fadeUp 0.6s 0.45s ease both; opacity: 0;
+  }
+  .btn-main {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    padding: 12px 24px; background: var(--violet); color: #fff;
+    border: none; border-radius: 4px; cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-main:hover { opacity: 0.87; transform: translateY(-1px); }
+  .btn-text {
+    font-family: var(--sans); font-size: 13px; color: var(--ink-3);
+    background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; gap: 5px; transition: color 0.2s;
+  }
+  .btn-text:hover { color: var(--ink); }
+  .btn-text span { transition: transform 0.2s; display: inline-block; }
+  .btn-text:hover span { transform: translateX(3px); }
+
+  .scroll-hint {
+    position: absolute; bottom: 1.5rem; left: 2.5rem;
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-3);
+    animation: fadeUp 0.6s 0.7s ease both; opacity: 0;
+  }
+  .scroll-line { width: 24px; height: 1px; background: var(--ink-3); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<div class="page">
+  <h2 class="sr-only">Interlock — hero section</h2>
+
+  <nav>
+    <div class="logo">
+      <div style="width:16px;height:16px;flex-shrink:0">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="0" y="0" width="7" height="7" rx="1.5" fill="#534AB7"/>
+          <rect x="9" y="0" width="7" height="7" rx="1.5" fill="#AFA9EC"/>
+          <rect x="0" y="9" width="7" height="7" rx="1.5" fill="#AFA9EC"/>
+          <rect x="9" y="9" width="7" height="7" rx="1.5" fill="#534AB7" opacity="0.35"/>
+        </svg>
+      </div>
+      Interlock
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Studio</a></li>
+    </ul>
+    <button class="nav-cta">Start a project</button>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Brisbane — Web design &amp; development</div>
+      <h1 class="headline">Sites that<br><em>scale with</em><br>your ambitions</h1>
+      <p class="subline">From launch page to full-stack platform, we build what your business needs.</p>
+      <div class="cta-row">
+        <button class="btn-main">Start a project</button>
+        <button class="btn-text">View our work <span>→</span></button>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </div>
+
+</div>

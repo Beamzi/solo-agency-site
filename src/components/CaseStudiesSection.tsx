@@ -23,20 +23,22 @@ export default function CaseStudiesSection() {
         whileInView="show"
         viewport={defaultViewport}
       >
-        <motion.header
+        <motion.section
           className="flex flex-col gap-[var(--spacing-sm)]"
           variants={itemVariants}
         >
-          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-            {caseStudiesPageContent.hero.eyebrow}
-          </p>
-          <h1 className="max-w-4xl text-3xl font-semibold text-[var(--foreground)] md:text-5xl">
-            {caseStudiesPageContent.hero.title}
-          </h1>
-          <p className="max-w-3xl text-base text-[var(--foreground)] md:text-lg">
-            {caseStudiesPageContent.hero.description}
-          </p>
-        </motion.header>
+          <header className="flex flex-col items-center justify-center gap-[var(--spacing-sm)] text-center">
+            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
+              {caseStudiesPageContent.hero.eyebrow}
+            </p>
+            <h1 className="max-w-4xl text-3xl font-semibold text-[var(--foreground)] md:text-5xl">
+              {caseStudiesPageContent.hero.title}
+            </h1>
+            <p className="max-w-3xl text-base text-[var(--color-muted)] md:text-lg">
+              {caseStudiesPageContent.hero.description}
+            </p>
+          </header>
+        </motion.section>
 
         <div className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2 xl:grid-cols-3">
           {caseStudiesPageContent.caseStudies.map((caseStudy) => (

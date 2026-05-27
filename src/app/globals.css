@@ -58,6 +58,8 @@
   --split-media-min-height: 15rem;
   --feature-carousel-duration: 500ms;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
+  --background-grid-columns: 28;
+  --background-grid-size: calc(100dvw / var(--background-grid-columns));
 
   /* Hero text shadows (text on image) */
   --hero-text-shadow: 0 2px 4px rgb(0 0 0 / 0.85), 0 4px 8px rgb(0 0 0 / 0.7);
@@ -99,10 +101,36 @@
 }
 
 body {
-  background: transparent;
+  background-color: var(--background);
+  background-image:
+    radial-gradient(
+      ellipse at 70% 20%,
+      color-mix(in srgb, var(--color-primary) 18%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      color-mix(in srgb, var(--color-border) 28%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-border) 28%, transparent) 1px,
+      transparent 1px
+    );
+  background-attachment: fixed, fixed, fixed;
+  background-repeat: no-repeat, repeat, repeat;
+  background-size:
+    140% 140%,
+    var(--background-grid-size) var(--background-grid-size),
+    var(--background-grid-size) var(--background-grid-size);
+  background-position:
+    center top,
+    center top,
+    center top;
   color: var(--foreground);
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
   min-height: 100vh;
+  overflow-x: clip;
   position: relative;
 }
 
