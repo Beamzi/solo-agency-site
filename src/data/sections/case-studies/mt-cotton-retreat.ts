@@ -10,7 +10,7 @@ export const mtCottonRetreatCaseStudy = {
   summary:
     "Redesigned the Mt Cotton Retreat website to improve interaction flow into the booking journey, with an embedded booking system connected through API synchronization with Booking.com.",
   heroImage: {
-    src: "/case-studies/mt-cotton/mtcotton-1.png",
+    src: "/case-studies/mt-cotton/mtcotton-1.jpg",
     alt: "Mt Cotton Retreat website redesign hero preview",
   },
   challenge: {

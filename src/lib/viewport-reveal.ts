@@ -1,9 +1,15 @@
+"use client";
+
 /**
  * Shared viewport-reveal animation for staggered fade-up.
- * Use with motion components: initial="hidden", whileInView="show", viewport={defaultViewport}.
+ * Prefer useViewportReveal() over whileInView — it handles client navigations
+ * where the section is already in view on mount.
  * Respects prefers-reduced-motion when passed true.
  */
 
+import { useInView } from "motion/react";
+import { useRef } from "react";
+import type { RefObject } from "react";
 import type { Variants } from "framer-motion";
 
 const DEFAULT_OFFSET = 16;
@@ -61,3 +67,23 @@ export const defaultViewport = {
   once: true,
   amount: 0.2,
 } as const;
+
+/**
+ * In-view options for useInView / useViewportReveal.
+ * initial: true ensures sections already on screen after client navigation still reveal.
+ */
+export const defaultInViewOptions = {
+  once: true,
+  amount: 0.2,
+  initial: true,
+} as const;
+
+export function useViewportReveal(): {
+  ref: RefObject<HTMLElement | null>;
+  shouldShow: boolean;
+} {
+  const ref = useRef<HTMLElement | null>(null);
+  const isInView = useInView(ref, defaultInViewOptions);
+
+  return { ref, shouldShow: isInView };
+}

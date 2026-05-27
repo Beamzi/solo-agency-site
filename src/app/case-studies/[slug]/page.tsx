@@ -32,7 +32,8 @@ export async function generateMetadata({
     };
   }
 
-  const title = caseStudy.meta?.title ?? `${caseStudy.client} Case Study | InterLock`;
+  const title =
+    caseStudy.meta?.title ?? `${caseStudy.client} Case Study | InterLock`;
   const description = caseStudy.meta?.description ?? caseStudy.summary;
   const rawImage = caseStudy.meta?.image ?? caseStudy.heroImage.src;
   const image = typeof rawImage === "string" ? rawImage : rawImage.src;

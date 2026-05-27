@@ -5,6 +5,7 @@ export type CaseStudyDetailContent = {
   client: string;
   sector: string;
   featuredPriority?: 1 | 2 | 3;
+  fullRow?: boolean;
   timeline: string;
   timelineLabel: string;
   summary: string;

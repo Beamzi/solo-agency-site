@@ -43,6 +43,7 @@ export const caseStudiesPageContent = {
     ),
     imageSrc: caseStudy.heroImage.src,
     imageAlt: caseStudy.heroImage.alt,
+    fullRow: caseStudy.fullRow ?? false,
   })),
   closing: {
     title: "Want Your Project Featured Here Next?",

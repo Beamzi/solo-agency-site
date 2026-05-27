@@ -5,106 +5,156 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { caseStudiesPageContent } from "@/data/sections/case-studies";
 import {
-  defaultViewport,
   getViewportRevealVariants,
+  useViewportReveal,
 } from "@/lib/viewport-reveal";
+
+type CaseStudyListItem =
+  (typeof caseStudiesPageContent.caseStudies)[number];
+
+function CaseStudyCard({
+  caseStudy,
+  ctaLabel,
+}: {
+  caseStudy: CaseStudyListItem;
+  ctaLabel: string;
+}) {
+  if (caseStudy.fullRow) {
+    return (
+      <Link
+        href={`/case-studies/${caseStudy.slug}`}
+        className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] text-[var(--foreground)] no-underline transition-colors hover:bg-[var(--background-elevated-high)] md:grid-cols-2"
+      >
+        <div className="relative aspect-[16/9] overflow-hidden border-b border-[var(--color-border)] bg-[var(--background)] md:aspect-auto md:min-h-[calc(var(--spacing-xl)*8)] md:border-r md:border-b-0">
+          <Image
+            src={caseStudy.imageSrc}
+            alt={caseStudy.imageAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-top"
+          />
+        </div>
+
+        <div className="flex flex-col justify-between gap-[var(--spacing-md)] p-[var(--spacing-md)]">
+          <div className="flex flex-col gap-[var(--spacing-xs)]">
+            <p className="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-[var(--color-primary)]">
+              {caseStudy.sector}
+            </p>
+            <h2 className="text-2xl font-light leading-snug tracking-tight text-[var(--foreground)]">
+              {caseStudy.client}
+            </h2>
+            <p className="text-sm font-light leading-relaxed text-[var(--color-muted)]">
+              {caseStudy.brief}
+            </p>
+          </div>
+          <p className="font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-[var(--color-primary)]">
+            {ctaLabel}
+          </p>
+        </div>
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      href={`/case-studies/${caseStudy.slug}`}
+      className="flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] text-[var(--foreground)] no-underline transition-colors hover:bg-[var(--background-elevated-high)]"
+    >
+      <div className="relative aspect-[2/1] overflow-hidden border-b border-[var(--color-border)] bg-[var(--background)]">
+        <Image
+          src={caseStudy.imageSrc}
+          alt={caseStudy.imageAlt}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover object-top"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col justify-between gap-[var(--spacing-sm)] p-[var(--spacing-md)]">
+        <div className="flex flex-col gap-[calc(var(--spacing-xs)/2)]">
+          <p className="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-[var(--color-muted)]">
+            {caseStudy.sector}
+          </p>
+          <h3 className="text-sm font-normal leading-snug text-[var(--foreground)]">
+            {caseStudy.client}
+          </h3>
+          <p className="text-xs font-light leading-relaxed text-[var(--color-muted)]">
+            {caseStudy.brief}
+          </p>
+        </div>
+        <p className="font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-[var(--color-primary)]">
+          {ctaLabel}
+        </p>
+      </div>
+    </Link>
+  );
+}
 
 export default function CaseStudiesSection() {
   const prefersReducedMotion = useReducedMotion();
+  const { ref, shouldShow } = useViewportReveal();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);
 
+  const reveal = shouldShow || prefersReducedMotion === true;
+
   return (
-    <section className="py-[var(--spacing-xl)]">
+    <section ref={ref} className="py-[var(--spacing-xl)]">
       <motion.div
-        className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
+        className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
         variants={containerVariants}
         initial="hidden"
-        whileInView="show"
-        viewport={defaultViewport}
+        animate={reveal ? "show" : "hidden"}
       >
-        <motion.section
-          className="flex flex-col gap-[var(--spacing-sm)]"
+        <motion.header
+          className="flex flex-col items-center justify-center gap-[var(--spacing-sm)] text-center"
           variants={itemVariants}
         >
-          <header className="flex flex-col items-center justify-center gap-[var(--spacing-sm)] text-center">
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
-              {caseStudiesPageContent.hero.eyebrow}
-            </p>
-            <h1 className="max-w-4xl text-3xl font-semibold text-[var(--foreground)] md:text-5xl">
-              {caseStudiesPageContent.hero.title}
-            </h1>
-            <p className="max-w-3xl text-base text-[var(--color-muted)] md:text-lg">
-              {caseStudiesPageContent.hero.description}
-            </p>
-          </header>
-        </motion.section>
+          <p className="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-[var(--color-primary)]">
+            {caseStudiesPageContent.hero.eyebrow}
+          </p>
+          <h1 className="max-w-4xl text-3xl font-light leading-snug tracking-tight text-[var(--foreground)] md:text-5xl">
+            {caseStudiesPageContent.hero.title}
+          </h1>
+          <p className="max-w-3xl text-sm leading-relaxed text-[var(--color-muted)] md:text-base">
+            {caseStudiesPageContent.hero.description}
+          </p>
+        </motion.header>
 
-        <div className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2 xl:grid-cols-3">
+        <motion.div className="grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2">
           {caseStudiesPageContent.caseStudies.map((caseStudy) => (
-            <motion.article
-              key={caseStudy.client}
-              className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+            <motion.div
+              key={caseStudy.slug}
+              className={caseStudy.fullRow ? "md:col-span-2" : undefined}
               variants={itemVariants}
             >
-              <div className="relative aspect-[2.1/1] w-full overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)]">
-                <Image
-                  src={caseStudy.imageSrc}
-                  alt={caseStudy.imageAlt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="flex flex-col gap-[calc(var(--spacing-xs)/2)]">
-                <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-                  {caseStudy.sector}
-                </p>
-                <h2 className="text-xl font-semibold text-[var(--foreground)]">
-                  {caseStudy.client}
-                </h2>
-              </div>
-
-              <p className="text-sm text-[var(--foreground)]">
-                {caseStudy.brief}
-              </p>
-
-              <ul className="flex list-disc flex-col gap-[calc(var(--spacing-xs)/2)] pl-[var(--spacing-md)] text-sm text-[var(--color-muted)]">
-                {caseStudy.outcomes.map((outcome) => (
-                  <li key={outcome}>{outcome}</li>
-                ))}
-              </ul>
-
-              <div className="mt-auto pt-[var(--spacing-xs)]">
-                <Link
-                  href={`/case-studies/${caseStudy.slug}`}
-                  className="btn-secondary px-[var(--spacing-md)]"
-                >
-                  {caseStudiesPageContent.caseStudyCtaLabel}
-                </Link>
-              </div>
-            </motion.article>
+              <CaseStudyCard
+                caseStudy={caseStudy}
+                ctaLabel={caseStudiesPageContent.caseStudyCtaLabel}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.section
-          className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+          className="grid grid-cols-1 items-center gap-[var(--spacing-md)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)] md:grid-cols-2"
           variants={itemVariants}
         >
-          <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
+          <h2 className="text-2xl font-light leading-snug tracking-tight text-[var(--foreground)]">
             {caseStudiesPageContent.closing.title}
           </h2>
-          <p className="text-base text-[var(--foreground)]">
-            {caseStudiesPageContent.closing.description}
-          </p>
-          <div className="pt-[var(--spacing-xs)]">
-            <Link
-              href={caseStudiesPageContent.closing.ctaHref}
-              className="btn-primary h-[var(--spacing-xl)] items-center justify-center px-[var(--spacing-md)]"
-            >
-              {caseStudiesPageContent.closing.ctaLabel}
-            </Link>
+          <div className="flex flex-col gap-[var(--spacing-sm)]">
+            <p className="text-sm font-light leading-relaxed text-[var(--color-muted)]">
+              {caseStudiesPageContent.closing.description}
+            </p>
+            <div>
+              <Link
+                href={caseStudiesPageContent.closing.ctaHref}
+                className="btn-primary h-[var(--spacing-xl)] items-center justify-center px-[var(--spacing-md)]"
+              >
+                {caseStudiesPageContent.closing.ctaLabel}
+              </Link>
+            </div>
           </div>
         </motion.section>
       </motion.div>

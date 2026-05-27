@@ -1,22 +1,17 @@
 export const aboutSectionContent = {
   eyebrow: "About",
-  title: "About section title",
+  title: {
+    lead: "About section",
+    accent: "title",
+    tail: "",
+  },
   intro:
     "About section intro that explains who the agency is and how it helps clients.",
   story: {
-    title: "Our Story",
+    title: "Our story",
     paragraphs: [
       "Story paragraph one.",
       "Story paragraph two.",
-    ],
-  },
-  capabilities: {
-    title: "What We Do",
-    items: [
-      {
-        title: "Capability title",
-        description: "Capability description.",
-      },
     ],
   },
   approach: {

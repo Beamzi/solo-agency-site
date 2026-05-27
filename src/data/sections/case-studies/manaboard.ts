@@ -6,6 +6,7 @@ export const manaboardCaseStudy = {
   client: "Manaboard",
   sector: "SaaS Product",
   featuredPriority: 1,
+  fullRow: true,
   timeline: "Product build and launch",
   timelineLabel: caseStudyDetailLabels.timeline,
   summary:

@@ -1,34 +1,107 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 import { heroAltContent } from "@/data/sections/hero-alt";
 import styles from "./hero-alt.module.css";
+import {
+  getViewportRevealVariants,
+  useViewportReveal,
+} from "@/lib/viewport-reveal";
 
 export default function InterlockHero() {
+  const prefersReducedMotion = useReducedMotion();
+  const { ref, shouldShow } = useViewportReveal();
+  const { container: containerVariants, item: itemVariants } =
+    getViewportRevealVariants(prefersReducedMotion);
+  const reveal = shouldShow || prefersReducedMotion === true;
+  const gridContainerVariants = prefersReducedMotion
+    ? containerVariants
+    : {
+        ...containerVariants,
+        show: {
+          transition: {
+            staggerChildren: 0,
+            delayChildren: 0.02,
+          },
+        },
+      };
+  const leftTextContainerVariants = prefersReducedMotion
+    ? containerVariants
+    : {
+        ...containerVariants,
+        show: {
+          transition: {
+            staggerChildren: 0.04,
+            delayChildren: 0.02,
+          },
+        },
+      };
+  const leftTextItemVariants = prefersReducedMotion
+    ? itemVariants
+    : {
+        hidden: { opacity: 0, y: 10 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.32 },
+        },
+      };
+  const spotlightVariants = prefersReducedMotion
+    ? itemVariants
+    : {
+        hidden: { opacity: 0, y: 12 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.35 },
+        },
+      };
+
   return (
     <section
+      ref={ref}
       aria-label={heroAltContent.ariaLabel}
       className={`${styles.section} relative flex h-[calc(100vh-var(--navbar-height))] flex-col justify-center overflow-hidden bg-transparent py-[var(--spacing-xl)]`}
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-[var(--content-max-width)] grid-cols-1 gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)] lg:grid-cols-2 lg:items-center">
-        <div>
-          <p className="mb-[var(--spacing-sm)] flex items-center gap-[var(--spacing-xs)] text-[0.625rem] uppercase tracking-[0.16em] text-[var(--color-primary)]">
+      <motion.div
+        className="relative z-10 mx-auto grid w-full max-w-[var(--content-max-width)] grid-cols-1 gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)] lg:grid-cols-2 lg:items-center"
+        variants={gridContainerVariants}
+        initial="hidden"
+        animate={reveal ? "show" : "hidden"}
+      >
+        <motion.div variants={leftTextContainerVariants}>
+          <motion.p
+            className="mb-[var(--spacing-sm)] flex items-center gap-[var(--spacing-xs)] text-[0.625rem] uppercase tracking-[0.16em] text-[var(--color-primary)]"
+            variants={leftTextItemVariants}
+          >
             {heroAltContent.eyebrow}
-          </p>
+          </motion.p>
 
-          <h1 className="mb-[var(--spacing-sm)] font-sans text-[clamp(2rem,5vw,3.25rem)] font-light leading-[1.08] tracking-[-0.03em] text-[var(--foreground)]">
+          <motion.h1
+            className="mb-[var(--spacing-sm)] font-sans text-[clamp(2rem,5vw,3.25rem)] font-light leading-[1.08] tracking-[-0.03em] text-[var(--foreground)]"
+            variants={leftTextItemVariants}
+          >
             {heroAltContent.heading.lead}{" "}
             <em className="not-italic text-[var(--color-primary)]">
               {heroAltContent.heading.accent}
             </em>
             <br />
             {heroAltContent.heading.tail}
-          </h1>
+          </motion.h1>
 
-          <p className="mb-[var(--spacing-md)] max-w-[calc(var(--spacing-xl)*10)] text-[0.9375rem] leading-relaxed text-[var(--color-muted)]">
+          <motion.p
+            className="mb-[var(--spacing-md)] max-w-[calc(var(--spacing-xl)*10)] text-[0.9375rem] leading-relaxed text-[var(--color-muted)]"
+            variants={leftTextItemVariants}
+          >
             {heroAltContent.description}
-          </p>
+          </motion.p>
 
-          <div className="flex flex-wrap items-center gap-[var(--spacing-sm)]">
+          <motion.div
+            className="flex flex-wrap items-center gap-[var(--spacing-sm)]"
+            variants={leftTextItemVariants}
+          >
             <Link
               href={heroAltContent.primaryCta.href}
               className="btn-primary h-[var(--spacing-xl)] items-center justify-center px-[var(--spacing-md)]"
@@ -41,11 +114,12 @@ export default function InterlockHero() {
             >
               {heroAltContent.secondaryCta.label}
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <article
+        <motion.article
           className={`${styles.spotlightCard} rounded-[var(--radius-lg)] border p-[var(--spacing-sm)]`}
+          variants={spotlightVariants}
         >
           <div className="relative mb-[var(--spacing-sm)] h-[calc(var(--spacing-xl)*3)] overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background)]">
             <Image
@@ -88,8 +162,8 @@ export default function InterlockHero() {
           >
             {heroAltContent.spotlight.cta.label}
           </Link>
-        </article>
-      </div>
+        </motion.article>
+      </motion.div>
     </section>
   );
 }

@@ -12,111 +12,148 @@ interface AboutSectionProps {
   content: AboutSectionContent;
 }
 
+function getStoryPullQuote(paragraph: string) {
+  const sentenceEnd = paragraph.indexOf(".");
+
+  if (sentenceEnd === -1) {
+    return { pullQuote: paragraph, remainder: "" };
+  }
+
+  return {
+    pullQuote: paragraph.slice(0, sentenceEnd + 1),
+    remainder: paragraph.slice(sentenceEnd + 1).trim(),
+  };
+}
+
 export default function AboutSection({ content }: AboutSectionProps) {
   const prefersReducedMotion = useReducedMotion();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);
 
+  const firstStoryParagraph = content.story.paragraphs[0] ?? "";
+  const { pullQuote, remainder: firstParagraphRemainder } =
+    getStoryPullQuote(firstStoryParagraph);
+
+  const cardClassName =
+    "rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)] md:p-[var(--spacing-xl)]";
+
   return (
     <main>
       <section className="py-[var(--spacing-xl)]">
         <motion.div
-          className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
+          className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:gap-[var(--spacing-xl)] md:px-[var(--spacing-lg)]"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
           viewport={defaultViewport}
         >
-          <motion.header
-            className="flex flex-col gap-[var(--spacing-sm)]"
-            variants={itemVariants}
-          >
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+          <motion.div variants={itemVariants}>
+            <p className="mb-[var(--spacing-sm)] flex items-center gap-[var(--spacing-xs)] text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+              <span
+                aria-hidden="true"
+                className="block h-px w-[var(--spacing-sm)] bg-[var(--color-border)]"
+              />
               {content.eyebrow}
             </p>
-            <h1 className="max-w-4xl text-3xl font-semibold text-[var(--foreground)] md:text-5xl">
-              {content.title}
-            </h1>
-            <p className="max-w-3xl text-base text-[var(--foreground)] md:text-lg">
-              {content.intro}
-            </p>
-          </motion.header>
+            <div
+              className={`${cardClassName} grid grid-cols-1 items-center gap-[var(--spacing-lg)] md:grid-cols-2 md:gap-[var(--spacing-xl)]`}
+            >
+              <h1 className="text-3xl font-light leading-[1.1] tracking-tight text-[var(--foreground)] md:text-4xl">
+                {content.title.lead}
+                {content.title.accent ? (
+                  <>
+                    {" "}
+                    <span className="text-[var(--color-primary)]">
+                      {content.title.accent}
+                    </span>
+                  </>
+                ) : null}
+                {content.title.tail}
+              </h1>
+              <p className="text-sm font-light leading-relaxed text-[var(--color-muted)]">
+                {content.intro}
+              </p>
+            </div>
+          </motion.div>
 
-          <motion.section
-            className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
-            variants={itemVariants}
-          >
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
+          <motion.section className={cardClassName} variants={itemVariants}>
+            <p className="mb-[var(--spacing-md)] font-mono text-[0.75rem] uppercase tracking-[0.14em] text-[var(--color-muted)]">
               {content.story.title}
-            </h2>
-            <div className="flex flex-col gap-[var(--spacing-sm)] text-[var(--foreground)]">
-              {content.story.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          </motion.section>
-
-          <motion.section
-            className="flex flex-col gap-[var(--spacing-md)]"
-            variants={itemVariants}
-          >
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
-              {content.capabilities.title}
-            </h2>
-            <div className="grid grid-cols-1 gap-[var(--spacing-sm)] md:grid-cols-3">
-              {content.capabilities.items.map((item) => (
-                <article
-                  key={item.title}
-                  className="flex flex-col gap-[var(--spacing-xs)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+            </p>
+            {pullQuote ? (
+              <p className="mb-[var(--spacing-lg)] max-w-2xl border-l-[1.5px] border-[var(--color-primary)] pl-[var(--spacing-md)] text-2xl font-light italic leading-relaxed tracking-tight text-[var(--foreground)]">
+                {pullQuote}
+              </p>
+            ) : null}
+            <div className="flex max-w-2xl flex-col gap-[var(--spacing-sm)]">
+              {firstParagraphRemainder ? (
+                <p className="text-sm font-light leading-relaxed text-[var(--color-muted)]">
+                  {firstParagraphRemainder}
+                </p>
+              ) : null}
+              {content.story.paragraphs.slice(1).map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="text-sm font-light leading-relaxed text-[var(--color-muted)]"
                 >
-                  <h3 className="text-lg font-semibold text-[var(--foreground)]">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-[var(--foreground)]">
-                    {item.description}
-                  </p>
-                </article>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </motion.section>
+
+          <motion.section className={cardClassName} variants={itemVariants}>
+            <div className="border-b border-[var(--color-border)] pb-[var(--spacing-md)]">
+              <h2 className="text-2xl font-light tracking-tight text-[var(--foreground)]">
+                {content.approach.title}
+              </h2>
+            </div>
+            <div className="flex flex-col">
+              {content.approach.items.map((item, index) => (
+                <div
+                  key={item}
+                  className={`grid grid-cols-[var(--spacing-xl)_1fr] items-center gap-[var(--spacing-md)] py-[var(--spacing-sm)] ${
+                    index !== content.approach.items.length - 1
+                      ? "border-b border-[var(--color-border)]"
+                      : ""
+                  }`}
+                >
+                  <span className="font-mono text-[0.625rem] text-[var(--color-primary)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm font-light leading-snug text-[var(--foreground)]">
+                    {item}
+                  </span>
+                </div>
               ))}
             </div>
           </motion.section>
 
           <motion.section
-            className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
+            className={`${cardClassName} grid grid-cols-1 items-center gap-[var(--spacing-lg)] md:grid-cols-2 md:gap-[var(--spacing-xl)]`}
             variants={itemVariants}
           >
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
-              {content.approach.title}
-            </h2>
-            <ul className="flex list-disc flex-col gap-[var(--spacing-xs)] pl-[var(--spacing-md)] text-[var(--foreground)]">
-              {content.approach.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </motion.section>
-
-          <motion.section
-            className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-md)] shadow-[var(--shadow-sm)]"
-            variants={itemVariants}
-          >
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
+            <h2 className="text-2xl font-light leading-snug tracking-tight text-[var(--foreground)]">
               {content.cta.title}
             </h2>
-            <p className="text-base text-[var(--foreground)]">
-              {content.cta.description}
-            </p>
-            <div className="flex flex-col gap-[var(--spacing-sm)] pt-[var(--spacing-xs)] sm:flex-row">
-              <Link
-                href={content.cta.primaryHref}
-                className="btn-primary h-[var(--spacing-xl)] items-center justify-center px-[var(--spacing-md)]"
-              >
-                {content.cta.primaryLabel}
-              </Link>
-              <Link
-                href={content.cta.secondaryHref}
-                className="btn-secondary px-[var(--spacing-md)]"
-              >
-                {content.cta.secondaryLabel}
-              </Link>
+            <div className="flex flex-col gap-[var(--spacing-sm)]">
+              <p className="text-sm font-light leading-relaxed text-[var(--color-muted)]">
+                {content.cta.description}
+              </p>
+              <div className="flex flex-col gap-[var(--spacing-sm)] sm:flex-row sm:items-center">
+                <Link
+                  href={content.cta.primaryHref}
+                  className="btn-primary h-[var(--spacing-xl)] items-center justify-center px-[var(--spacing-md)]"
+                >
+                  {content.cta.primaryLabel}
+                </Link>
+                <Link
+                  href={content.cta.secondaryHref}
+                  className="inline-flex h-[var(--spacing-xl)] items-center text-sm text-[var(--color-muted)] no-underline transition-colors hover:text-[var(--foreground)]"
+                >
+                  {content.cta.secondaryLabel} →
+                </Link>
+              </div>
             </div>
           </motion.section>
         </motion.div>
