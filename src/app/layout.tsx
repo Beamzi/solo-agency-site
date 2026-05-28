@@ -4,6 +4,7 @@ import "./globals.css";
 import "../styles/gradients.css";
 import "../styles/button-gradient.css";
 import "../styles/parallax-bg.css";
+import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 
 const geistSans = Sulphur_Point({
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

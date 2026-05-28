@@ -17,13 +17,7 @@ export const navigationContent = {
     },
     { label: "Case Studies", href: "/case-studies" },
     { label: "About", href: "/about" },
-    {
-      label: "Resources",
-      subItems: [
-        { label: "Blog", href: "/blog" },
-        { label: "Guides", href: "/guides" },
-      ],
-    },
+    { label: "Contact", href: "/contact" },
   ],
 } as const;
 

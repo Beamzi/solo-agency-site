@@ -38,7 +38,7 @@ export default function ServicesSection({ content }: ServicesSectionProps) {
             className="flex flex-col gap-[var(--spacing-sm)] text-center"
             variants={itemVariants}
           >
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+            <p className="text-sm font-semibol font-light font-sans text-[var(--color-primary)] uppercase tracking-wide text-[var(--color-muted)]">
               {content.eyebrow}
             </p>
             <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">

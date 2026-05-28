@@ -78,12 +78,21 @@ export const defaultInViewOptions = {
   initial: true,
 } as const;
 
-export function useViewportReveal(): {
+type UseViewportRevealOptions = {
+  /** When false, only triggers after the user scrolls the element into view (not on mount). */
+  initial?: boolean;
+  once?: boolean;
+  amount?: number | "some" | "all";
+};
+
+export function useViewportReveal(
+  options?: UseViewportRevealOptions,
+): {
   ref: RefObject<HTMLElement | null>;
   shouldShow: boolean;
 } {
   const ref = useRef<HTMLElement | null>(null);
-  const isInView = useInView(ref, defaultInViewOptions);
+  const isInView = useInView(ref, { ...defaultInViewOptions, ...options });
 
   return { ref, shouldShow: isInView };
 }
