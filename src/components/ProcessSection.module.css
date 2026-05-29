@@ -42,3 +42,31 @@
   position: relative;
   z-index: 1;
 }
+
+.processMarqueeFade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--spacing-xl),
+    black calc(100% - var(--spacing-xl)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--spacing-xl),
+    black calc(100% - var(--spacing-xl)),
+    transparent 100%
+  );
+}
+
+.processNodeChevronFade {
+  background: radial-gradient(
+    ellipse calc(var(--spacing-xl) + var(--spacing-sm)) calc(var(--spacing-md) + var(--spacing-xs))
+      at 50% 50%,
+    var(--background-elevated) 0%,
+    color-mix(in srgb, var(--background-elevated) 88%, transparent) 38%,
+    color-mix(in srgb, var(--background-elevated) 45%, transparent) 58%,
+    transparent 78%
+  );
+}
