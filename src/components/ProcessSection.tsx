@@ -94,13 +94,13 @@ export default function ProcessSection({ content }: ProcessSectionProps) {
             variants={itemVariants}
             className="flex flex-col gap-[var(--spacing-sm)] text-center"
           >
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+            <p className="text-sm font-light font-sans  uppercase tracking-wide text-[var(--color-primary)]">
               {process.eyebrow}
             </p>
-            <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
+            <h2 className="text-3xl font-semibold  text-[var(--foreground)] md:text-4xl">
               {process.title}
             </h2>
-            <p className="mx-auto max-w-2xl text-base text-[var(--foreground)] md:text-lg">
+            <p className="mx-auto max-w-2xl  text-[var(--color-muted)]  text-sm md:text-lg">
               {process.subtitle}
             </p>
           </motion.div>

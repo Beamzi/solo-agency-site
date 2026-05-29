@@ -9,8 +9,7 @@ import {
   useViewportReveal,
 } from "@/lib/viewport-reveal";
 
-type CaseStudyListItem =
-  (typeof caseStudiesPageContent.caseStudies)[number];
+type CaseStudyListItem = (typeof caseStudiesPageContent.caseStudies)[number];
 
 function CaseStudyCard({
   caseStudy,

@@ -38,13 +38,13 @@ export default function ServicesSection({ content }: ServicesSectionProps) {
             className="flex flex-col gap-[var(--spacing-sm)] text-center"
             variants={itemVariants}
           >
-            <p className="text-sm font-semibol font-light font-sans text-[var(--color-primary)] uppercase tracking-wide text-[var(--color-muted)]">
+            <p className="text-sm  font-light font-sans text-[var(--color-primary)]  uppercase tracking-wide ">
               {content.eyebrow}
             </p>
-            <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
+            <h2 className="text-3xl  font-semibold text-[var(--foreground)] md:text-4xl">
               {content.title}
             </h2>
-            <p className="mx-auto text-base text-[var(--foreground)] md:text-lg">
+            <p className="mx-auto text-[var(--color-muted)] md:text-lg text-sm">
               {content.subtitle}
             </p>
           </motion.div>
