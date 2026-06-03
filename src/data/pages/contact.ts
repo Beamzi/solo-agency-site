@@ -14,15 +14,15 @@ export const contactPageContent = {
   methods: [
     {
       label: "Email",
-      value: "hello@interlock.studio",
+      value: "james@interflowlab.com",
       href: "mailto:hello@interlock.studio",
       description:
         "Send a project brief, timeline, or technical question and we will reply with next steps.",
     },
     {
       label: "Phone",
-      value: "+61 400 000 000",
-      href: "tel:+61400000000",
+      value: "+61 491 625 139",
+      href: "tel:+61491625139",
       description:
         "Prefer a quick conversation first? Call us to talk through scope and fit.",
     },
