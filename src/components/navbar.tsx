@@ -176,9 +176,12 @@ export function Navbar() {
             ))}
           </div>
 
-          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:pointer-events-auto md:relative md:mx-0 md:w-full md:flex-row md:items-center md:justify-center md:gap-[var(--spacing-sm)]">
+          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:pointer-events-none md:relative md:mx-0 md:w-full md:flex-row md:items-center md:justify-center md:gap-[var(--spacing-sm)]">
             {navigationContent.items.map((item, index) => (
-              <li key={item.label} className="w-full md:w-auto">
+              <li
+                key={item.label}
+                className="w-full md:pointer-events-auto md:w-auto"
+              >
                 {"subItems" in item ? (
                   <div className="relative w-full md:w-auto">
                     {(() => {
@@ -250,7 +253,7 @@ export function Navbar() {
                 )}
               </li>
             ))}
-            <li className="md:absolute md:right-0 md:ml-0">
+            <li className="md:pointer-events-auto md:absolute md:right-0 md:ml-0">
               <Link
                 href={navigationContent.ctaHref}
                 onClick={closeNavbarMenus}
