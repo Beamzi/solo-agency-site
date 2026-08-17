@@ -78,7 +78,7 @@ export const hpgShedsPatiosCaseStudy = {
     },
   ],
   meta: {
-    title: "HPG Sheds & Patios Case Study | InterLock",
+    title: "HPG Sheds & Patios Case Study | Interflow",
     description:
       "How we took HPG from business concept to live launch with branding, scalable Next.js architecture, WebSheds integration, and production deployment.",
     image: "/case-studies/hpg-sheds-patios/hpg-sheds-hero.jpg",

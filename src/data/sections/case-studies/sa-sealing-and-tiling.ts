@@ -77,7 +77,7 @@ export const saSealingAndTilingCaseStudy = {
     },
   ],
   meta: {
-    title: "SA Sealing & Tiling Case Study | InterLock",
+    title: "SA Sealing & Tiling Case Study | Interflow",
     description:
       "How we launched SA Sealing & Tiling with logo design, branding, web design, development, and deployment for local lead growth.",
     image: "/case-studies/sa-sealing-tiling/SA-sealing-tiling-1.jpg",

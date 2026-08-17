@@ -20,9 +20,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Interflow Lab | Web Design & Development Melbourne",
+  title: "Interflow Lab | Web Design & Development Brisbane",
   description:
-    "Melbourne-based web design and development lab. From launch page to full-stack platform, we build what your business needs.",
+    "Brisbane-based web design and development lab. From launch page to full-stack platform, we build what your business needs.",
+  icons: {
+    icon: "/logo/logo.svg",
+  },
 };
 
 export default function RootLayout({

@@ -77,7 +77,7 @@ export const integratedAssetManagementSolutionsCaseStudy = {
     },
   ],
   meta: {
-    title: "Integrated Asset Management Solutions Case Study | InterLock",
+    title: "Integrated Asset Management Solutions Case Study | Interflow",
     description:
       "How we delivered brand, logo, web design, and launch deployment for Integrated Asset Management Solutions.",
     image: "/case-studies/asset-management-solutions/IAMS-1.jpg",

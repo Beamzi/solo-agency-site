@@ -77,7 +77,7 @@ export const mrPureWaterCaseStudy = {
     },
   ],
   meta: {
-    title: "Mr Pure Water Case Study | InterLock",
+    title: "Mr Pure Water Case Study | Interflow",
     description:
       "How we launched Mr Pure Water with branding, website design and development, and an integrated ecommerce store with custom code enhancements.",
     image: "/case-studies/mr-pure-water/mr-pure-2.jpg",

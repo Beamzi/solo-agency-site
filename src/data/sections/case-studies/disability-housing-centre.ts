@@ -77,7 +77,7 @@ export const disabilityHousingCentreCaseStudy = {
     },
   ],
   meta: {
-    title: "Disability Housing Centre Case Study | InterLock",
+    title: "Disability Housing Centre Case Study | Interflow",
     description:
       "How we redesigned The Disability Housing Centre in WordPress and Elementor with custom PHP and JavaScript search and filtering for SDA property discovery.",
     image: "/case-studies/disability-housing-centre/DHS-1.jpg",

@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigationContent } from "@/data/navigation";
@@ -92,9 +93,17 @@ export function Navbar() {
         <div className="flex w-full items-center justify-between md:w-auto">
           <Link
             href={navigationContent.homeHref}
-            className="text-lg font-semibold tracking-tight text-[var(--foreground)]"
+            className="inline-flex items-center gap-[var(--spacing-xs)] text-lg font-semibold tracking-tight text-[var(--foreground)]"
           >
-            {navigationContent.siteName}
+            <Image
+              src={navigationContent.logoSrc}
+              alt={navigationContent.logoAlt}
+              width={437}
+              height={264}
+              className="h-[var(--spacing-lg)] w-auto"
+              priority
+            />
+            <span>{navigationContent.siteName}</span>
           </Link>
 
           <button
@@ -128,7 +137,7 @@ export function Navbar() {
         <nav
           id="primary-navigation"
           aria-label={navigationContent.menuAriaLabel}
-          className={`${isMenuOpen ? "block" : "hidden"} ${mobileMenuTopClass} absolute right-[var(--spacing-sm)] z-20 w-max min-w-[calc(var(--spacing-xl)*4)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated-high)] p-[var(--spacing-xs)] shadow-[var(--shadow-md)] transition-[top] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} sm:right-[var(--spacing-md)] md:static md:block md:min-w-0 md:w-full md:flex-1 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:transition-none`}
+          className={`${isMenuOpen ? "block" : "hidden"} ${mobileMenuTopClass} absolute right-[var(--spacing-sm)] z-20 w-max min-w-[calc(var(--spacing-xl)*4)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated-high)] p-[var(--spacing-xs)] shadow-[var(--shadow-md)] transition-[top] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} sm:right-[var(--spacing-md)] md:inset-x-0 md:top-0 md:flex md:h-full md:min-w-0 md:w-full md:items-center md:pointer-events-none md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:transition-none`}
         >
           <div
             aria-hidden="true"
@@ -167,7 +176,7 @@ export function Navbar() {
             ))}
           </div>
 
-          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:relative md:mx-0 md:w-full md:flex-row md:items-center md:justify-center md:gap-[var(--spacing-sm)]">
+          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:pointer-events-auto md:relative md:mx-0 md:w-full md:flex-row md:items-center md:justify-center md:gap-[var(--spacing-sm)]">
             {navigationContent.items.map((item, index) => (
               <li key={item.label} className="w-full md:w-auto">
                 {"subItems" in item ? (

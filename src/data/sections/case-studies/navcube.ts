@@ -77,7 +77,7 @@ export const navcubeCaseStudy = {
     },
   ],
   meta: {
-    title: "Navcube Case Study | InterLock",
+    title: "Navcube Case Study | Interflow",
     description:
       "3D interactive web navigation concept built with Next.js, React, TypeScript, Tailwind CSS, Framer Motion, and Three.js.",
     image: "/case-studies/navcube/navcube-2.jpg",

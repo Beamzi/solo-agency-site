@@ -77,7 +77,7 @@ export const daymediaCaseStudy = {
     },
   ],
   meta: {
-    title: "Daymedia Case Study | InterLock",
+    title: "Daymedia Case Study | Interflow",
     description:
       "How we redesigned the Daymedia agency site with Lottie-powered animations, 90+ PageSpeed performance, and a 3x uplift in inbound enquiries.",
     image: "/case-studies/daymedia/daymedia-1.jpg",

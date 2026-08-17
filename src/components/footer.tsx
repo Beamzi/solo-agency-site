@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { footerContent } from "@/data/footer";
@@ -10,53 +11,6 @@ import {
 
 function isExternalHref(href: string) {
   return href.startsWith("mailto:") || href.startsWith("tel:");
-}
-
-function BrandMark() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className="h-[var(--spacing-sm)] w-[var(--spacing-sm)] shrink-0"
-    >
-      <rect
-        x="0"
-        y="0"
-        width="7"
-        height="7"
-        rx="1.5"
-        fill="var(--color-secondary)"
-      />
-      <rect
-        x="9"
-        y="0"
-        width="7"
-        height="7"
-        rx="1.5"
-        fill="color-mix(in srgb, var(--color-secondary) 55%, var(--foreground))"
-      />
-      <rect
-        x="0"
-        y="9"
-        width="7"
-        height="7"
-        rx="1.5"
-        fill="color-mix(in srgb, var(--color-secondary) 55%, var(--foreground))"
-      />
-      <rect
-        x="9"
-        y="9"
-        width="7"
-        height="7"
-        rx="1.5"
-        fill="var(--color-secondary)"
-        opacity="0.35"
-      />
-    </svg>
-  );
 }
 
 export function Footer() {
@@ -91,7 +45,13 @@ export function Footer() {
                 href={brand.homeHref}
                 className="mb-[var(--spacing-sm)] flex items-center gap-[var(--spacing-xs)] font-mono text-[0.75rem] font-medium uppercase tracking-[0.14em] text-[var(--foreground)] no-underline"
               >
-                <BrandMark />
+                <Image
+                  src={brand.logoSrc}
+                  alt={brand.logoAlt}
+                  width={437}
+                  height={264}
+                  className="h-[var(--spacing-lg)] w-auto shrink-0"
+                />
                 {brand.name}
               </Link>
               <p className="max-w-[calc(var(--spacing-xl)*4.5)] text-[0.75rem] font-light leading-relaxed text-[var(--color-muted)]">

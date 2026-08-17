@@ -12,14 +12,14 @@ export const contactSectionContent = {
   methods: [
     {
       label: "Email",
-      value: "hello@example.com",
-      href: "mailto:hello@example.com",
+      value: "james@interflowlab.io",
+      href: "mailto:james@interflowlab.io",
       description: "Best for project briefs, timelines, and technical questions.",
     },
     {
       label: "Phone",
-      value: "+61 400 000 000",
-      href: "tel:+61400000000",
+      value: "+61 491 625 139",
+      href: "tel:+61491625139",
       description: "Best if you want to talk through scope quickly.",
     },
   ],

@@ -77,7 +77,7 @@ export const mtCottonRetreatCaseStudy = {
     },
   ],
   meta: {
-    title: "Mt Cotton Retreat Case Study | InterLock",
+    title: "Mt Cotton Retreat Case Study | Interflow",
     description:
       "How we redesigned Mt Cotton Retreat with a clearer booking funnel, embedded reservation flow, and Booking.com API synchronization.",
     image: "/case-studies/mt-cotton/mtcotton-1.jpg",

@@ -1,5 +1,7 @@
 export const navigationContent = {
   siteName: "Interflow",
+  logoSrc: "/logo/logo.svg",
+  logoAlt: "",
   homeHref: "/",
   menuAriaLabel: "Primary",
   openMenuLabel: "Open menu",

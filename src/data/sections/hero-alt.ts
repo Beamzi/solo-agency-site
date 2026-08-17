@@ -1,5 +1,5 @@
 export const heroAltContent = {
-  ariaLabel: "Interlock hero section",
+  ariaLabel: "Interflow hero section",
   eyebrow: "Brisbane - Web design and development",
   heading: {
     lead: "Sites that",

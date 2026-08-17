@@ -79,7 +79,7 @@ export const manaboardCaseStudy = {
     },
   ],
   meta: {
-    title: "Manaboard Case Study | InterLock",
+    title: "Manaboard Case Study | Interflow",
     description:
       "Performance-first SaaS case study: Manaboard delivers near-instant task workflows with hybrid SSR and CSR architecture, optimistic UI, and scalable full-stack foundations.",
     image: "/case-studies/manaboard/recents-and-reminders (1).jpg",

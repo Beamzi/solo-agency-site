@@ -1,6 +1,8 @@
 export const footerContent = {
   brand: {
-    name: "InterLock",
+    name: "Interflow",
+    logoSrc: "/logo/logo.svg",
+    logoAlt: "",
     homeHref: "/",
     tagline:
       "Web design, development, and brand strategy for businesses that want clarity, craft, and measurable growth.",
@@ -21,16 +23,16 @@ export const footerContent = {
     methods: [
       {
         label: "Email",
-        value: "hello@example.com",
-        href: "mailto:hello@example.com",
+        value: "james@interflowlab.io",
+        href: "mailto:james@interflowlab.io",
       },
       {
         label: "Phone",
-        value: "+61 400 000 000",
-        href: "tel:+61400000000",
+        value: "+61 491 625 139",
+        href: "tel:+61491625139",
       },
     ],
   },
-  copyright: "© 2026 InterLock. All rights reserved.",
-  location: "Melbourne, AU",
+  copyright: "© 2026 Interflow. All rights reserved.",
+  location: "Brisbane, AU",
 };

@@ -14,8 +14,8 @@ export const contactPageContent = {
   methods: [
     {
       label: "Email",
-      value: "james@interflowlab.com",
-      href: "mailto:hello@interlock.studio",
+      value: "james@interflowlab.io",
+      href: "mailto:james@interflowlab.io",
       description:
         "Send a project brief, timeline, or technical question and we will reply with next steps.",
     },
