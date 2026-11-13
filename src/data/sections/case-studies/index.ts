@@ -31,7 +31,7 @@ const sortedCaseStudyDetails = [...caseStudyDetails].sort((a, b) => {
 export const caseStudiesPageContent = {
   hero: {
     eyebrow: "Proof Of Work",
-    title: "Case Studies Built For Decision-Makers",
+    title: "Case Studies Built Around Real Business Needs",
     description:
       "A snapshot of recent website redesign and growth-focused builds. Each project highlights the problem, the approach, and the commercial outcome.",
   },

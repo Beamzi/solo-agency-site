@@ -1,8 +1,8 @@
 export const processSectionContent = {
-  eyebrow: "How It Works",
-  title: "Our Website Design and Launch Process",
+  eyebrow: "How We Work",
+  title: "From Business Bottleneck To Working System",
   subtitle:
-    "From planning to launch, we keep the process straightforward and collaborative so you always know what comes next.",
+    "We start with how your business operates, then design and build the right combination of customer experience, backend systems, integrations, and automation.",
   cta: {
     label: "Start your project",
     href: "/contact",
@@ -11,30 +11,30 @@ export const processSectionContent = {
     { 
       step: "Step 1",
       icon: "design",
-      title: "Discovery & Strategy",
+      title: "Workflow Discovery & Technical Scope",
       description:
-        "We learn about your business, goals, and audience, then map a clear plan for what your site needs to do.",
+        "We map your goals, users, existing tools, manual handoffs, and operational constraints before defining what the system needs to achieve.",
     },
     {
       step: "Step 2",
       icon: "submit",
-      title: "UX & Visual Design",
+      title: "Experience & System Design",
       description:
-        "We organize your pages and create design mockups that match your brand and make the user journey easy to follow.",
+        "We design the customer and staff journeys, interface structure, data model, and integration points so every part works as one coherent flow.",
     },
     {
       step: "Step 3",
       icon: "review",
-      title: "Build & Content Integration",
+      title: "Full-Stack Build & Integration",
       description:
-        "We build the site, add your content, and set up essentials like forms, mobile responsiveness, and search visibility.",
+        "We build the frontend and backend, connect APIs and business tools, automate repetitive steps, and keep progress visible through working milestones.",
     },
     {
       step: "Step 4",
       icon: "delivery",
-      title: "QA, Launch & Deployment",
+      title: "Validation, Launch & Iteration",
       description:
-        "After final checks and your approval, we launch the site and stay close to ensure everything goes live smoothly.",
+        "We test real end-to-end scenarios, deploy the system, monitor the launch, and refine it as your team begins using it in day-to-day operations.",
     },
   ],
 };
