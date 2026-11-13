@@ -136,7 +136,7 @@ export const eloiseAndLouPatisserieCaseStudy = {
     },
   ],
   meta: {
-    title: "Eloise & Lou Patisserie Case Study | InterLock",
+    title: "Eloise & Lou Patisserie Case Study | Interflow",
     description:
       "How we built Eloise & Lou's website and catering operations platform with staff order management, Square OAuth, catalogue and invoice APIs, Resend automation, PostgreSQL, Prisma, and Next.js.",
     image:
