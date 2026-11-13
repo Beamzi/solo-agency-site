@@ -34,5 +34,5 @@ export const footerContent = {
     ],
   },
   copyright: "© 2026 Interflow. All rights reserved.",
-  location: "Brisbane, AU",
+  location: "Melbourne, AU",
 };

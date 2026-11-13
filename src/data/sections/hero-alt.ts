@@ -1,6 +1,6 @@
 export const heroAltContent = {
   ariaLabel: "Interflow hero section",
-  eyebrow: "Brisbane - Web design and development",
+  eyebrow: "Melbourne - Web design and development",
   heading: {
     lead: "Sites that",
     accent: "scale with",
@@ -18,16 +18,19 @@ export const heroAltContent = {
   },
   spotlight: {
     eyebrow: "Featured case study",
-    title: "Manaboard SaaS Platform",
+    title: "Eloise & Lou Catering Platform",
     description:
-      "Built and launched a performance-first project management app with near-instant workflows and scalable architecture.",
-    resultValue: "~50ms transitions with instant-feeling task interactions",
-    imageSrc: "/promise-screenshots/manaboard-medium.png",
-    imageAlt: "Manaboard dashboard interface preview",
+      "Built a full-stack catering operations platform with custom ordering, authenticated staff workflows, Square invoicing, and automated email.",
+    resultValue:
+      "Ordering, staff review, invoicing, and customer communication connected",
+    imageSrc:
+      "/case-studies/eloise-and-lou-patisserie/screen-concepts/eloise-2.png",
+    imageAlt:
+      "Eloise and Lou catering platform with product catalogue and order summary",
     cta: {
       label: "Read case study ->",
-      href: "/case-studies/manaboard",
+      href: "/case-studies/eloise-and-lou-patisserie",
     },
-    tags: ["SaaS", "Fullstack", "Performance"],
+    tags: ["Full-stack", "Square API", "Automation"],
   },
 };

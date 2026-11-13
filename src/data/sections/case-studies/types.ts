@@ -24,6 +24,22 @@ export type CaseStudyDetailContent = {
       description: string;
     }>;
   };
+  operationalModel?: {
+    title: string;
+    heading: string;
+    description: string;
+    details: Array<{
+      title: string;
+      description: string;
+    }>;
+    diagrams: Array<{
+      src: string | StaticImageData;
+      alt: string;
+      caption: string;
+      width: number;
+      height: number;
+    }>;
+  };
   results: {
     title: string;
     metrics: Array<{

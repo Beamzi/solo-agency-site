@@ -1,5 +1,6 @@
 import { disabilityHousingCentreCaseStudy } from "@/data/sections/case-studies/disability-housing-centre";
 import { daymediaCaseStudy } from "@/data/sections/case-studies/daymedia";
+import { eloiseAndLouPatisserieCaseStudy } from "@/data/sections/case-studies/eloise-and-lou-patisserie";
 import { hpgShedsPatiosCaseStudy } from "@/data/sections/case-studies/hpg-sheds-patios";
 import { integratedAssetManagementSolutionsCaseStudy } from "@/data/sections/case-studies/integrated-asset-management-solutions";
 import { manaboardCaseStudy } from "@/data/sections/case-studies/manaboard";
@@ -11,6 +12,7 @@ import type { CaseStudyDetailContent } from "@/data/sections/case-studies/types"
 const caseStudyDetails: CaseStudyDetailContent[] = [
   manaboardCaseStudy,
   hpgShedsPatiosCaseStudy,
+  eloiseAndLouPatisserieCaseStudy,
   disabilityHousingCentreCaseStudy,
   daymediaCaseStudy,
   integratedAssetManagementSolutionsCaseStudy,

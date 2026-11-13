@@ -3,12 +3,12 @@ import type { AboutSectionContent } from "@/data/sections/about";
 export const aboutPageContent = {
   eyebrow: "About",
   title: {
-    lead: "A Brisbane Agency for Websites,",
+    lead: "A Melbourne Agency for Websites,",
     accent: "Backend Systems",
     tail: ", and Integrations",
   },
   intro:
-    "We are a Brisbane-based digital agency that combines strategic website design with custom development to help service businesses grow with less operational friction.",
+    "We are a Melbourne-based digital agency that combines strategic website design with custom development to help service businesses grow with less operational friction.",
   story: {
     title: "Our story",
     paragraphs: [

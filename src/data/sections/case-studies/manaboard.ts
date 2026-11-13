@@ -5,8 +5,7 @@ export const manaboardCaseStudy = {
   slug: "manaboard",
   client: "Manaboard",
   sector: "SaaS Product",
-  featuredPriority: 1,
-  fullRow: true,
+  featuredPriority: 2,
   timeline: "Product build and launch",
   timelineLabel: caseStudyDetailLabels.timeline,
   summary:

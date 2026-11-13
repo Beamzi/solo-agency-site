@@ -5,7 +5,7 @@ export const hpgShedsPatiosCaseStudy = {
   slug: "hpg-sheds-patios",
   client: "HPG Sheds & Patios",
   sector: "Residential and Rural Construction",
-  featuredPriority: 2,
+  featuredPriority: 3,
   timeline: "Launch project",
   timelineLabel: caseStudyDetailLabels.timeline,
   summary:

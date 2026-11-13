@@ -1,12 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import type { CaseStudyDetailContent } from "@/data/sections/case-studies";
 import {
-  defaultViewport,
   getViewportRevealVariants,
+  useViewportReveal,
 } from "@/lib/viewport-reveal";
 
 interface CaseStudyDetailProps {
@@ -15,8 +16,13 @@ interface CaseStudyDetailProps {
 
 export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [hoveredGalleryIndex, setHoveredGalleryIndex] = useState<number | null>(
+    null,
+  );
+  const { ref, shouldShow } = useViewportReveal();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);
+  const reveal = shouldShow || prefersReducedMotion === true;
   const leadChallengeParagraph = content.challenge.paragraphs[0];
   const supportingChallengeParagraphs = content.challenge.paragraphs.slice(1);
   const liveSiteHost = content.liveSiteUrl
@@ -29,13 +35,12 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
 
   return (
     <main>
-      <section className="py-[var(--spacing-xl)]">
+      <section ref={ref} className="py-[var(--spacing-xl)]">
         <motion.div
           className="mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-xl)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]"
           variants={containerVariants}
           initial="hidden"
-          whileInView="show"
-          viewport={defaultViewport}
+          animate={reveal ? "show" : "hidden"}
         >
           <motion.section
             className="flex flex-col gap-[var(--spacing-sm)]"
@@ -45,7 +50,10 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
               <span className="h-px w-[var(--spacing-sm)] bg-[var(--color-border)]" />
               {content.sector}
             </p>
-            <div className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--background-elevated)] shadow-[var(--shadow-sm)] md:grid-cols-2">
+            <div
+              className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--background-elevated)] shadow-[var(--shadow-sm)] md:grid-cols-2"
+              onMouseLeave={() => setHoveredGalleryIndex(null)}
+            >
               <header className="flex flex-col justify-between gap-[var(--spacing-lg)] border-b border-[var(--color-border)] p-[var(--spacing-lg)] md:border-b-0 md:border-r">
                 <div className="flex flex-wrap gap-[var(--spacing-xs)]">
                   <span className="rounded-[var(--radius-sm)] border border-[var(--color-primary)] px-[var(--spacing-xs)] py-[calc(var(--spacing-xs)/2)] text-xs font-semibold uppercase tracking-wide text-[var(--color-primary)]">
@@ -159,6 +167,71 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
             </div>
           </motion.section>
 
+          {content.operationalModel ? (
+            <motion.section
+              className="flex flex-col gap-[var(--spacing-sm)]"
+              variants={itemVariants}
+            >
+              <p className="flex items-center gap-[var(--spacing-xs)] text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+                <span className="h-px w-[var(--spacing-sm)] bg-[var(--color-border)]" />
+                {content.operationalModel.title}
+              </p>
+              <div className="grid grid-cols-1 gap-[var(--spacing-lg)] rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-sm)] lg:grid-cols-2">
+                <div className="flex flex-col gap-[var(--spacing-md)]">
+                  {content.operationalModel.diagrams.map((diagram) => (
+                    <figure
+                      key={diagram.caption}
+                      className="w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--background)]"
+                    >
+                      <div>
+                        <Image
+                          src={diagram.src}
+                          alt={diagram.alt}
+                          width={diagram.width}
+                          height={diagram.height}
+                          sizes="(max-width: 768px) 100vw, 72rem"
+                          className="h-auto w-full object-contain"
+                        />
+                      </div>
+                      <figcaption className="border-t border-[var(--color-border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-xs text-[var(--color-muted)]">
+                        {diagram.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+                <div className="flex flex-col justify-center gap-[var(--spacing-md)]">
+                  <div className="flex flex-col gap-[var(--spacing-sm)]">
+                    <h2 className="text-2xl font-semibold leading-tight text-[var(--foreground)] md:text-3xl">
+                      {content.operationalModel.heading}
+                    </h2>
+                    <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+                      {content.operationalModel.description}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    {content.operationalModel.details.map((detail, index) => (
+                      <div
+                        key={detail.title}
+                        className={`flex flex-col gap-[var(--spacing-xs)] py-[var(--spacing-sm)] ${
+                          index > 0
+                            ? "border-t border-[var(--color-border)]"
+                            : ""
+                        }`}
+                      >
+                        <h3 className="text-base font-semibold text-[var(--foreground)]">
+                          {detail.title}
+                        </h3>
+                        <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+                          {detail.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.section>
+          ) : null}
+
           <motion.section
             className="flex flex-col gap-[var(--spacing-sm)]"
             variants={itemVariants}
@@ -216,32 +289,67 @@ export default function CaseStudyDetail({ content }: CaseStudyDetailProps) {
             </p>
             <div className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--background-elevated)] shadow-[var(--shadow-sm)] md:grid-cols-2">
               {content.gallery.map((image, index) => {
-                const objectPositionClass =
-                  index % 2 === 0 ? "object-left-top" : "object-right-top";
+                const isNeighbourOfHoveredImage =
+                  hoveredGalleryIndex !== null &&
+                  hoveredGalleryIndex !== index &&
+                  Math.floor(hoveredGalleryIndex / 2) === Math.floor(index / 2);
+                const neighbourOverlayClass =
+                  hoveredGalleryIndex !== null &&
+                  hoveredGalleryIndex < index
+                    ? "case-study-gallery-hover-overlay-from-left"
+                    : "case-study-gallery-hover-overlay-from-right";
 
                 return (
-                <article
+                <motion.article
                   key={image.alt}
-                  className={`relative aspect-[16/10] overflow-hidden bg-[var(--background)] ${
+                  className={`relative aspect-[16/10] overflow-visible bg-[var(--background)] ${
+                    hoveredGalleryIndex === index
+                      ? "z-[calc(var(--z-navbar)-1)]"
+                      : "z-0"
+                  } ${
                     index % 2 === 0
                       ? "md:border-r md:border-[var(--color-border)]"
                       : ""
                   } ${index < content.gallery.length - 2 ? "md:border-b md:border-[var(--color-border)]" : ""}`}
+                  onMouseEnter={() => setHoveredGalleryIndex(index)}
                 >
-                  <div className="absolute inset-0">
+                  <motion.div
+                    className={`absolute inset-y-0 overflow-hidden ${
+                      index % 2 === 0 ? "left-0" : "right-0"
+                    }`}
+                    initial={{ width: "100%" }}
+                    whileHover={{ width: "132%" }}
+                    transition={{
+                      duration: prefersReducedMotion ? 0 : 0.3,
+                    }}
+                  >
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className={`h-full w-full object-cover ${objectPositionClass}`}
+                      sizes="100vw"
+                      className="h-full w-full object-cover object-center"
                     />
-                  </div>
-                  <div
-                    className="case-study-gallery-vignette-overlay"
+                    <div
+                      className="case-study-gallery-vignette-overlay"
+                      aria-hidden="true"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className={`pointer-events-none absolute inset-0 z-10 ${neighbourOverlayClass}`}
+                    initial={false}
+                    animate={{
+                      opacity: isNeighbourOfHoveredImage ? 1 : 0,
+                    }}
+                    transition={{
+                      duration:
+                        prefersReducedMotion || !isNeighbourOfHoveredImage
+                          ? 0
+                          : 0.3,
+                    }}
                     aria-hidden="true"
                   />
-                </article>
+                </motion.article>
                 );
               })}
             </div>
