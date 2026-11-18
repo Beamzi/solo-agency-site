@@ -13,12 +13,6 @@ export function Navbar() {
   const [transitionsEnabled, setTransitionsEnabled] = useState(false);
   const [openSubmenuLabel, setOpenSubmenuLabel] = useState<string | null>(null);
   const pathname = usePathname();
-  const mobileMenuTopClass = isScrolled
-    ? "top-[calc(var(--navbar-height-compact)+var(--navbar-dropdown-offset))]"
-    : "top-[calc(var(--navbar-height)+var(--navbar-dropdown-offset))]";
-  const desktopSubmenuTopClass = isScrolled
-    ? "md:top-[calc(100%+var(--navbar-dropdown-offset))]"
-    : "md:top-[calc(100%+var(--navbar-dropdown-offset)+var(--navbar-dropdown-scroll-adjust))]";
 
   const closeNavbarMenus = () => {
     setIsMenuOpen(false);
@@ -73,7 +67,12 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const navbarBreakpoint = getComputedStyle(document.documentElement)
+      .getPropertyValue("--breakpoint-navbar")
+      .trim();
+    const mediaQuery = window.matchMedia(
+      `(min-width: ${navbarBreakpoint})`,
+    );
     const handleBreakpointChange = () => {
       closeNavbarMenus();
     };
@@ -87,10 +86,21 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-[var(--z-navbar)] box-border border-b border-[var(--color-border)] bg-[var(--background-elevated)] transition-[height] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} ${isScrolled ? "h-[var(--navbar-height-compact)]" : "h-[var(--navbar-height)]"}`}
+      className="sticky top-0 z-[var(--z-navbar)] h-[var(--navbar-height)]"
     >
-      <div className="relative mx-auto flex h-full w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-sm)] sm:px-[var(--spacing-md)]">
-        <div className="flex w-full items-center justify-between md:w-auto">
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 border-b border-[var(--color-border)] bg-[var(--background-elevated)] transition-opacity [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} ${isScrolled ? "opacity-0" : "opacity-100"}`}
+      />
+      <div className="absolute inset-x-[var(--spacing-xs)] inset-y-[calc((var(--navbar-height)-var(--navbar-height-compact))/2)] mx-auto max-w-[var(--content-wide-max-width)] sm:inset-x-[var(--spacing-sm)]">
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-0 rounded-[var(--radius-xl)] transition-[transform,box-shadow,background-color] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} ${isScrolled ? "scale-x-[var(--navbar-island-scale-scrolled)] bg-[var(--navbar-island-background)] shadow-[var(--shadow-lg)]" : "scale-x-[var(--navbar-island-scale-rest)] bg-[var(--background-elevated)] shadow-none"}`}
+        />
+        <div
+          className={`relative flex h-full w-full items-center justify-between transition-[padding] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} ${isScrolled ? "px-[var(--navbar-island-inline-inset-scrolled)]" : "px-[var(--navbar-island-inline-inset-rest)]"}`}
+        >
+        <div className="flex w-full items-center justify-between navbar:w-auto">
           <Link
             href={navigationContent.homeHref}
             className="inline-flex items-center gap-[var(--spacing-xs)] text-lg font-semibold tracking-tight text-[var(--foreground)]"
@@ -116,7 +126,7 @@ export function Navbar() {
                 : navigationContent.openMenuLabel
             }
             onClick={() => setIsMenuOpen((previousState) => !previousState)}
-            className="inline-flex h-[var(--spacing-xl)] w-[var(--spacing-xl)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] text-[var(--foreground)] hover:bg-[var(--background-elevated-high)] md:hidden"
+            className="inline-flex h-[var(--spacing-xl)] w-[var(--spacing-xl)] items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated)] text-[var(--foreground)] hover:bg-[var(--background-elevated-high)] navbar:hidden"
           >
             <span className="sr-only">
               {isMenuOpen
@@ -137,11 +147,11 @@ export function Navbar() {
         <nav
           id="primary-navigation"
           aria-label={navigationContent.menuAriaLabel}
-          className={`${isMenuOpen ? "block" : "hidden"} ${mobileMenuTopClass} absolute right-[var(--spacing-sm)] z-20 w-max min-w-[calc(var(--spacing-xl)*4)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated-high)] p-[var(--spacing-xs)] shadow-[var(--shadow-md)] transition-[top] [transition-duration:var(--navbar-height-transition-duration)] [transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "transition-none" : ""} sm:right-[var(--spacing-md)] md:inset-x-0 md:top-0 md:flex md:h-full md:min-w-0 md:w-full md:items-center md:pointer-events-none md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:transition-none`}
+          className={`${isMenuOpen ? "block" : "hidden"} absolute right-[var(--spacing-sm)] top-[calc(var(--navbar-height-compact)+var(--navbar-dropdown-offset))] z-20 w-max min-w-[calc(var(--spacing-xl)*4)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--background-elevated-high)] p-[var(--spacing-xs)] shadow-[var(--shadow-md)] sm:right-[var(--spacing-md)] navbar:top-0 navbar:flex navbar:h-full navbar:min-w-0 navbar:w-auto navbar:items-center navbar:pointer-events-none navbar:rounded-none navbar:border-0 navbar:bg-transparent navbar:p-0 navbar:shadow-none navbar:transition-[left,right] navbar:[transition-duration:var(--navbar-height-transition-duration)] navbar:[transition-timing-function:var(--navbar-height-transition-easing)] ${!transitionsEnabled ? "navbar:transition-none" : ""} ${isScrolled ? "navbar:inset-x-[var(--navbar-island-inline-inset-scrolled)]" : "navbar:inset-x-[var(--navbar-island-inline-inset-rest)]"}`}
         >
           <div
             aria-hidden="true"
-            className="h-0 overflow-hidden whitespace-nowrap text-transparent md:hidden"
+            className="h-0 overflow-hidden whitespace-nowrap text-transparent navbar:hidden"
           >
             {navigationContent.items.map((item) => (
               <div key={`measure-main-${item.label}`}>
@@ -176,14 +186,14 @@ export function Navbar() {
             ))}
           </div>
 
-          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] md:pointer-events-none md:relative md:mx-0 md:w-full md:flex-row md:items-center md:justify-center md:gap-[var(--spacing-sm)]">
+          <ul className="mx-auto w-max flex flex-col items-start gap-[var(--spacing-xs)] navbar:pointer-events-none navbar:relative navbar:mx-0 navbar:w-full navbar:flex-row navbar:items-center navbar:justify-center navbar:gap-[var(--spacing-sm)]">
             {navigationContent.items.map((item, index) => (
               <li
                 key={item.label}
-                className="w-full md:pointer-events-auto md:w-auto"
+                className="w-full navbar:pointer-events-auto navbar:w-auto"
               >
                 {"subItems" in item ? (
-                  <div className="relative w-full md:w-auto">
+                  <div className="relative w-full navbar:w-auto">
                     {(() => {
                       const isSubmenuOpen = openSubmenuLabel === item.label;
 
@@ -200,9 +210,9 @@ export function Navbar() {
                                   : item.label,
                               )
                             }
-                            className="flex w-full cursor-pointer items-center rounded-[var(--radius-md)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated)] md:w-auto"
+                            className="flex w-full cursor-pointer items-center rounded-[var(--radius-md)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated)] navbar:w-auto"
                           >
-                            <span className="inline-flex w-full items-center justify-between gap-[var(--spacing-xs)] md:w-auto md:justify-start">
+                            <span className="inline-flex w-full items-center justify-between gap-[var(--spacing-xs)] navbar:w-auto navbar:justify-start">
                               {item.label}
                               <span aria-hidden="true" className="text-xs">
                                 ▾
@@ -223,7 +233,7 @@ export function Navbar() {
                               duration: 0.24,
                               ease: [0.22, 1, 0.36, 1],
                             }}
-                            className={`w-max min-w-full origin-top rounded-[var(--radius-md)] bg-[var(--background)] md:absolute md:left-0 ${desktopSubmenuTopClass} md:mt-0 md:w-auto md:min-w-[calc(var(--spacing-xl)*4)] md:z-20 md:transition-[top] md:[transition-duration:var(--navbar-height-transition-duration)] md:[transition-timing-function:var(--navbar-height-transition-easing)] ${isSubmenuOpen ? "mt-[var(--spacing-xs)] max-h-[calc(var(--spacing-xl)*6)] visible pointer-events-auto border border-[var(--color-border)] p-[var(--spacing-xs)] shadow-[var(--shadow-sm)]" : "mt-0 max-h-0 invisible pointer-events-none overflow-hidden border-0 p-0 shadow-none"}`}
+                            className={`w-max min-w-full origin-top rounded-[var(--radius-md)] bg-[var(--background)] navbar:absolute navbar:left-0 navbar:top-[calc(100%+var(--navbar-dropdown-offset))] navbar:mt-0 navbar:w-auto navbar:min-w-[calc(var(--spacing-xl)*4)] navbar:z-20 ${isSubmenuOpen ? "mt-[var(--spacing-xs)] max-h-[calc(var(--spacing-xl)*6)] visible pointer-events-auto border border-[var(--color-border)] p-[var(--spacing-xs)] shadow-[var(--shadow-sm)]" : "mt-0 max-h-0 invisible pointer-events-none overflow-hidden border-0 p-0 shadow-none"}`}
                           >
                             {item.subItems.map((subItem) => (
                               <li key={subItem.label} className="w-full">
@@ -246,24 +256,25 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={closeNavbarMenus}
-                    className="inline-flex w-full justify-start rounded-[var(--radius-md)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated)] md:w-auto"
+                    className="inline-flex w-full justify-start rounded-[var(--radius-md)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background-elevated)] navbar:w-auto"
                   >
                     {item.label}
                   </Link>
                 )}
               </li>
             ))}
-            <li className="md:pointer-events-auto md:absolute md:right-0 md:ml-0">
+            <li className="navbar:pointer-events-auto navbar:absolute navbar:right-0 navbar:ml-0">
               <Link
                 href={navigationContent.ctaHref}
                 onClick={closeNavbarMenus}
-                className="btn-primary w-full justify-start px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left md:w-auto"
+                className="btn-primary w-full justify-start px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-left navbar:w-auto"
               >
                 {navigationContent.ctaLabel}
               </Link>
             </li>
           </ul>
         </nav>
+        </div>
       </div>
     </header>
   );

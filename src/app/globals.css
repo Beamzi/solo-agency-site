@@ -48,12 +48,18 @@
   --content-wide-max-width: 90rem; /* 22.5rem */
   --navbar-height: 5rem;
   --navbar-height-compact: 4rem;
+  --navbar-island-scale-rest: 1;
+  --navbar-island-scale-scrolled: 0.96;
+  --navbar-island-inline-inset-rest: var(--spacing-sm);
+  --navbar-island-inline-inset-scrolled: calc(var(--spacing-sm) + 2%);
+  --navbar-island-background: color-mix(
+    in srgb,
+    var(--background-elevated) 94%,
+    var(--foreground)
+  );
   --navbar-height-transition-duration: 380ms;
   --navbar-height-transition-easing: cubic-bezier(0.22, 1, 0.36, 1);
   --navbar-dropdown-offset: var(--spacing-md);
-  --navbar-dropdown-scroll-adjust: calc(
-    (var(--navbar-height) - var(--navbar-height-compact)) / 2
-  );
   --z-navbar: 40;
   --footer-height: 4.5rem;
   --feature-card-min-height: 12rem;
@@ -78,6 +84,7 @@
 }
 
 @theme inline {
+  --breakpoint-navbar: 53.125rem;
   --color-background: var(--background);
   --color-background-elevated: var(--background-elevated);
   --color-background-elevated-high: var(--background-elevated-high);
