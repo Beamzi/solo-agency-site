@@ -44,7 +44,7 @@ export default function ServicesSection({ content }: ServicesSectionProps) {
             <h2 className="text-3xl  font-semibold text-[var(--foreground)] md:text-4xl">
               {content.title}
             </h2>
-            <p className="mx-auto text-[var(--color-muted)] md:text-lg text-sm">
+            <p className="mx-auto text-sm text-[var(--color-subheading)] md:text-lg">
               {content.subtitle}
             </p>
           </motion.div>

@@ -92,7 +92,7 @@ export default function InterlockHero() {
           </motion.h1>
 
           <motion.p
-            className="mb-[var(--spacing-md)] max-w-[calc(var(--spacing-xl)*10)] text-[0.9375rem] leading-relaxed text-[var(--color-muted)]"
+            className={`${styles.secondaryText} mb-[var(--spacing-md)] max-w-[calc(var(--spacing-xl)*10)] text-[0.9375rem] leading-relaxed`}
             variants={leftTextItemVariants}
           >
             {heroAltContent.description}
@@ -110,7 +110,7 @@ export default function InterlockHero() {
             </Link>
             <Link
               href={heroAltContent.secondaryCta.href}
-              className="inline-flex h-[var(--spacing-xl)] items-center text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--foreground)]"
+              className={`${styles.secondaryText} inline-flex h-[var(--spacing-xl)] items-center text-sm transition-colors hover:text-[var(--foreground)]`}
             >
               {heroAltContent.secondaryCta.label}
             </Link>

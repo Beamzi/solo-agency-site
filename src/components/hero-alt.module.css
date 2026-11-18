@@ -6,6 +6,10 @@
   content: none;
 }
 
+.secondaryText {
+  color: var(--color-subheading);
+}
+
 .spotlightCard {
   background: color-mix(in srgb, var(--background-elevated) 88%, transparent);
   border-color: color-mix(in srgb, var(--color-border) 58%, transparent);

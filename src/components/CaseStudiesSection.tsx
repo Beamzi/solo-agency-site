@@ -115,7 +115,7 @@ export default function CaseStudiesSection() {
           <h1 className="max-w-4xl text-3xl font-light leading-snug tracking-tight text-[var(--foreground)] md:text-5xl">
             {caseStudiesPageContent.hero.title}
           </h1>
-          <p className="max-w-3xl text-sm leading-relaxed text-[var(--color-muted)] md:text-base">
+          <p className="max-w-3xl text-sm leading-relaxed text-[var(--color-subheading)] md:text-base">
             {caseStudiesPageContent.hero.description}
           </p>
         </motion.header>

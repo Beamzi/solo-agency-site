@@ -10,6 +10,7 @@
   --color-primary: #bf364b;
   --color-secondary: #5c3a94;
   --color-muted: #9ca3af;
+  --color-subheading: #5f6670;
   --color-border: #e5e7eb;
   --color-border-dashed: #bab9b9; /* neutral-600 for dashed lines in light mode */
   --color-error: #ef4444;
@@ -100,10 +101,11 @@
     --color-border-dashed: var(
       --color-border
     ); /* dashed lines match border in dark mode */
-    --color-muted: #52525b;
+    --color-muted: #8b8b95;
+    --color-subheading: #8b8b95;
     --background-grid-color: color-mix(
       in srgb,
-      var(--color-border) 28%,
+      var(--color-border) 55%,
       transparent
     );
     /* primary comes from :root so your brand color applies in dark mode too */
